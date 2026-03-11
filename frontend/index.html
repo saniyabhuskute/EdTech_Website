@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPortal | Premier Admission Consultancy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- DYNAMIC COLOR VARIABLES --- */
+        :root {
+            --yale-blue: #003566;
+            --saffron: #F0CB46;
+            --satin-gold: #CCA000;
+            
+            /* Dark Mode (Default) */
+            --bg-deep: #000814;      /* Rich Black */
+            --bg-surface: #001D3D;   /* Oxford Blue */
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --nav-bg: #000814;
+        }
+
+        body.light-mode {
+            --bg-deep: #ffffff;      
+            --bg-surface: #f1f5f9;   
+            --text-main: #000814;    
+            --text-muted: #475569;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --nav-bg: #001D3D; /* Keep nav dark for contrast in light mode */
+        }
+
+        body { 
+            background-color: var(--bg-deep); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+            transition: all 0.3s ease;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar { background-color: var(--nav-bg); border-bottom: 1px solid var(--border-color); padding: 15px 0; }
+        .nav-link { color: white !important; font-weight: 500; font-size: 0.9rem; margin: 0 5px; opacity: 0.85; }
+        .nav-link:hover { opacity: 1; color: var(--saffron) !important; }
+
+        /* --- HERO & SEGREGATION --- */
+        .hero-section { background: radial-gradient(circle at top right, var(--yale-blue), var(--bg-deep)); padding: 100px 0; }
+        .section-block { padding: 80px 0; }
+        .bg-alt { background-color: var(--bg-surface); }
+
+        /* --- COMPONENTS --- */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            height: 100%;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover { transform: translateY(-5px); border-color: var(--saffron); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        .search-box {
+            background: var(--bg-deep);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 8px;
+            display: flex;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .city-circle {
+            width: 70px; height: 70px; border-radius: 50%;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; transition: 0.3s; margin: 0 auto 10px;
+        }
+        .city-item:hover .city-circle { background: var(--saffron); border-color: var(--saffron); transform: scale(1.1); }
+
+        /* --- BUTTONS --- */
+        .btn-saffron { background-color: var(--saffron); color: #000; font-weight: 700; border-radius: 8px; border: none; }
+        .btn-saffron:hover { background-color: var(--satin-gold); color: #000; }
+        
+        #themeToggle {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .stat-card { border-left: 3px solid var(--saffron); padding-left: 15px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-white" href="#">Edu<span style="color:var(--saffron)">Portal</span></a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Colleges</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Exams</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-2">
+                    <button id="themeToggle">🌙 Mode</button>
+                    <a href="#" class="btn btn-link text-white text-decoration-none small">Login</a>
+                    <button class="btn btn-saffron btn-sm px-3">Join Now</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section text-center">
+        <div class="container">
+            <span class="badge rounded-pill px-3 py-2 mb-3" style="background: rgba(240, 203, 70, 0.15); color: var(--saffron); border: 1px solid var(--saffron);">#1 Admission Consulting Partner</span>
+            <h1 class="display-3 fw-extrabold mb-4">Your Future, <span style="color:var(--saffron)">Precisely Planned.</span></h1>
+            <p class="lead opacity-75 mb-5 mx-auto" style="max-width: 700px;">Compare 10k+ colleges, get expert counseling, and track upcoming entrance exams all in one place.</p>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="search-box">
+                        <input type="text" class="form-control bg-transparent border-0 text-white shadow-none" placeholder="Search colleges, exams or courses...">
+                        <button class="btn btn-saffron px-4 ms-2">Find My College</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5 g-4 text-start justify-content-center">
+                <div class="col-md-3 col-6"><div class="stat-card"><h4 class="fw-bold mb-0">10k+</h4><small class="opacity-50">Colleges Listed</small></div></div>
+                <div class="col-md-3 col-6"><div class="stat-card"><h4 class="fw-bold mb-0">500+</h4><small class="opacity-50">Exams Covered</small></div></div>
+                <div class="col-md-3 col-6"><div class="stat-card"><h4 class="fw-bold mb-0">2M+</h4><small class="opacity-50">Students Helped</small></div></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-block bg-alt">
+        <div class="container text-center">
+            <h3 class="fw-bold mb-5">Explore Top Study Hubs</h3>
+            <div class="row g-4">
+                <div class="col-4 col-md-2 city-item">
+                    <div class="city-circle">🏙️</div><p class="small fw-bold">Delhi</p>
+                </div>
+                <div class="col-4 col-md-2 city-item">
+                    <div class="city-circle">💻</div><p class="small fw-bold">Bangalore</p>
+                </div>
+                <div class="col-4 col-md-2 city-item">
+                    <div class="city-circle">🏢</div><p class="small fw-bold">Mumbai</p>
+                </div>
+                <div class="col-4 col-md-2 city-item">
+                    <div class="city-circle">🏯</div><p class="small fw-bold">Pune</p>
+                </div>
+                <div class="col-4 col-md-2 city-item">
+                    <div class="city-circle">🕌</div><p class="small fw-bold">Hyderabad</p>
+                </div>
+                <div class="col-4 col-md-2 city-item">
+                    <div class="city-circle">🏛️</div><p class="small fw-bold">Chennai</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <div><h3 class="fw-bold m-0">Trending Courses</h3><p class="text-muted small">Based on student applications 2026</p></div>
+                <a href="#" class="text-decoration-none fw-bold" style="color:var(--saffron)">View All →</a>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card">
+                        <div class="mb-3 text-saffron">🚀</div>
+                        <h5 class="fw-bold">MBA / PGDM</h5>
+                        <p class="small text-muted">Detailed comparison of top B-schools, ROI, and placement stats.</p>
+                        <hr class="opacity-25">
+                        <small>Avg Package: ₹12-25 LPA</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card">
+                        <div class="mb-3 text-saffron">⚙️</div>
+                        <h5 class="fw-bold">B.Tech / B.E.</h5>
+                        <p class="small text-muted">CS, Data Science, and AI specialties from tier-1 engineering colleges.</p>
+                        <hr class="opacity-25">
+                        <small>Avg Package: ₹8-18 LPA</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card">
+                        <div class="mb-3 text-saffron">⚖️</div>
+                        <h5 class="fw-bold">Law / LLB</h5>
+                        <p class="small text-muted">Explore National Law Universities (NLUs) and private law rankings.</p>
+                        <hr class="opacity-25">
+                        <small>Exam: CLAT / LSAT</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block bg-alt">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-4">
+                    <h3 class="fw-bold mb-3">Upcoming <span style="color:var(--satin-gold)">Exams</span></h3>
+                    <p class="text-muted">Never miss a deadline. Track registration dates and admit card alerts.</p>
+                    <button class="btn btn-saffron mt-3">All Exam Dates</button>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="glass-card p-3 d-flex align-items-center">
+                                <div class="bg-danger rounded-pill px-3 py-1 small text-white me-3">JEE</div>
+                                <div class="small fw-bold">Phase 2 Registrations Open</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="glass-card p-3 d-flex align-items-center">
+                                <div class="bg-secondary rounded-pill px-3 py-1 small text-white me-3">CAT</div>
+                                <div class="small fw-bold">Pattern Changes Announced</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="p-4 rounded-4" style="background: var(--yale-blue); color: white;">
+                                <h5 class="fw-bold">College Predictor Tool</h5>
+                                <p class="small opacity-75">Check which colleges you qualify for based on your scores.</p>
+                                <button class="btn btn-light btn-sm fw-bold">Launch Predictor</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5 border-top border-secondary mt-5">
+        <div class="container text-center opacity-75 small">
+            <p>&copy; 2026 EduPortal Admission Consultancy. All rights reserved.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#" class="text-reset">Privacy</a>
+                <a href="#" class="text-reset">Terms</a>
+                <a href="#" class="text-reset">Careers</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // THEME SWITCHER LOGIC
+        const themeBtn = document.getElementById('themeToggle');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            themeBtn.innerText = document.body.classList.contains('light-mode') ? '☀️ Light' : '🌙 Dark';
+        });
+    </script>
+</body>
+</html>
