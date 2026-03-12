@@ -110,7 +110,7 @@
 
 /* ── Base Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   font-family: var(--font-body);
   background: var(--bg);
@@ -118,8 +118,9 @@ body {
   min-height: 100vh;
   line-height: 1.65;
   transition: background .3s ease, color .3s ease;
+  overflow-x: hidden;
 }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
 a { text-decoration: none; }
 
 /* ── NAVBAR ── */
@@ -148,7 +149,8 @@ a { text-decoration: none; }
 .brand-text span { color: var(--saffron); }
 [data-theme="light"] .brand-text span { color: var(--yale); }
 
-.nav-links { display: flex; align-items: center; gap: 1px; list-style: none; }
+.nav-links { display: flex; align-items: center; gap: 1px; list-style: none; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.nav-links::-webkit-scrollbar { display: none; }
 .nav-links a {
   color: var(--text-muted); text-decoration: none; font-size: .8rem; font-weight: 500;
   padding: 5px 10px; border-radius: 7px; transition: var(--transition);
@@ -452,14 +454,70 @@ a { text-decoration: none; }
 @media (max-width: 1100px) {
   .nav-links a { padding: 5px 8px; font-size: .77rem; }
 }
+
+@media (max-width: 1024px) {
+  .navbar-inner { padding: 0 16px; }
+  .nav-links a { padding: 4px 6px; font-size: .74rem; }
+  .btn-login { padding: 6px 12px; font-size: .78rem; }
+  .btn-register { padding: 6px 12px; font-size: .78rem; }
+  .stats-inner { gap: 32px; }
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
+}
+
 @media (max-width: 900px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .nav-links a { padding: 4px 5px; font-size: .72rem; gap: 2px; }
+  .nav-links a i { font-size: .7rem; }
+  .btn-login { padding: 5px 10px; font-size: .75rem; }
+  .btn-register { padding: 5px 10px; font-size: .75rem; }
+  .nav-actions { gap: 6px; }
+  .btn-theme { width: 32px; height: 32px; font-size: .85rem; }
 }
+
 @media (max-width: 768px) {
   .nav-links, .nav-actions { display: none; }
   .hamburger { display: flex; }
-  .footer-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
   .hero { padding: 60px 20px 48px; }
+  .hero h1 { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+  .hero p { font-size: 0.95rem; }
   .section { padding: 52px 20px; }
-  .stats-inner { gap: 28px; }
+  .stats-bar { padding: 24px 20px; }
+  .stats-inner { gap: 24px; justify-content: center; }
+  .stat-number { font-size: 1.5rem; }
+  .hero-btns { flex-direction: column; align-items: center; max-width: 340px; margin: 0 auto; }
+  .btn-hero-primary, .btn-hero-secondary { width: 100%; justify-content: center; }
+  .section-header-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .section-sub { max-width: 100%; }
+  .footer-brand p { max-width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 50px 16px 40px; }
+  .section { padding: 40px 16px; }
+  .stats-bar { padding: 20px 16px; }
+  .stats-inner { gap: 16px; justify-content: space-around; flex-wrap: wrap; }
+  .stat-item { flex: 0 0 calc(50% - 16px); }
+  .stat-number { font-size: 1.35rem; }
+  .stat-label { font-size: 0.68rem; }
+  .site-footer { padding: 40px 16px 20px; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 16px; }
+  .social-links { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.5rem; }
+  .hero p { font-size: 0.88rem; margin-bottom: 24px; }
+  .section-title { font-size: 1.3rem; }
+  .section-sub { font-size: 0.88rem; }
+  .section-label { font-size: 0.65rem; }
+  .btn-ep { padding: 10px 20px; font-size: 0.84rem; }
+  .btn-ep-outline { padding: 9px 18px; font-size: 0.84rem; }
+  .btn-hero-primary, .btn-hero-secondary { padding: 11px 20px; font-size: 0.88rem; }
+  .hero-badge { font-size: 0.65rem; padding: 4px 10px; }
+  .input-ep { padding: 10px 14px; font-size: 0.86rem; }
+  .select-ep { padding: 10px 36px 10px 14px; font-size: 0.86rem; }
+  .navbar-inner { height: 58px; }
+  .brand-icon { width: 36px; height: 36px; font-size: 17px; }
+  .brand-text { font-size: 1.15rem; }
 }

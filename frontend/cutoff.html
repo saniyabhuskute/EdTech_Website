@@ -49,7 +49,8 @@
     .exam-tab.active{background:var(--btn-bg);border-color:var(--btn-bg);color:var(--btn-color);font-weight:700;}
     .info-banner{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:10px;font-size:.84rem;color:var(--text-muted);}
     .info-banner i{color:var(--saffron);font-size:1rem;flex-shrink:0;}
-    @media(max-width:768px){.filter-grid{flex-direction:column;}.filter-group{flex:1 1 100%;}}
+    @media(max-width:768px){.filter-grid{flex-direction:column;}.filter-group{flex:1 1 100%;}.exam-tabs{gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}.exam-tab{padding:6px 14px;font-size:.78rem;white-space:nowrap;flex-shrink:0;}.cutoff-main{padding:24px 16px 60px;}.result-info{flex-direction:column;align-items:flex-start;}}
+    @media(max-width:480px){.filter-bar{padding:14px 16px;}.info-banner{flex-direction:column;padding:12px 14px;font-size:.78rem;}.cutoff-table-wrap{border-radius:var(--radius-sm);}table{font-size:.78rem;}thead th{padding:10px 12px;font-size:.74rem;}tbody td{padding:10px 12px;}}
   </style>
 </head>
 <body>
