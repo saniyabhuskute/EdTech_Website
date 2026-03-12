@@ -12,7 +12,6 @@ function toggleTheme() {
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('ep-theme', next);
   updateThemeBtn(next);
-  syncThemeColor(next);
 }
 
 function updateThemeBtn(theme) {
@@ -28,7 +27,6 @@ function updateThemeBtn(theme) {
 document.addEventListener('DOMContentLoaded', function () {
   const theme = document.documentElement.getAttribute('data-theme') || 'dark';
   updateThemeBtn(theme);
-  syncThemeColor(theme);
   highlightActiveNav();
   initScrollTop();
   initMobileMenu();
@@ -106,40 +104,6 @@ function animateCounter(el) {
     el.textContent = prefix + (isFloat ? v.toFixed(1) : Math.floor(v)) + suffix;
     if (p < 1) requestAnimationFrame(tick);
   })(start);
-}
-
-/* ── PWA: Service Worker Registration ── */
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .catch(() => {/* SW registration failed silently */});
-  });
-}
-
-/* ── PWA: Install prompt ── */
-let _deferredInstall = null;
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  _deferredInstall = e;
-  // Show install button if present
-  const btn = document.getElementById('pwaInstallBtn');
-  if (btn) btn.style.display = 'inline-flex';
-});
-window.addEventListener('appinstalled', () => {
-  _deferredInstall = null;
-  const btn = document.getElementById('pwaInstallBtn');
-  if (btn) btn.style.display = 'none';
-});
-function installPWA() {
-  if (!_deferredInstall) return;
-  _deferredInstall.prompt();
-  _deferredInstall.userChoice.then(() => { _deferredInstall = null; });
-}
-
-/* ── Theme color meta sync ── */
-function syncThemeColor(theme) {
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', theme === 'dark' ? '#000814' : '#f4f7fb');
 }
 
 /* ── Toast notification ── */
