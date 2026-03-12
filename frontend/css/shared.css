@@ -462,4 +462,50 @@ a { text-decoration: none; }
   .hero { padding: 60px 20px 48px; }
   .section { padding: 52px 20px; }
   .stats-inner { gap: 28px; }
+
+/* ── Small Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  .hero h1  { font-size: 1.6rem; }
+  .hero p   { font-size: .9rem; }
+  .section  { padding: 40px 16px; }
+  .stats-inner { flex-direction: column; gap: 20px; align-items: center; }
+  .stat-number { font-size: 1.5rem; }
+  .btn-ep, .btn-ep-outline,
+  .btn-hero-primary, .btn-hero-secondary {
+    padding: 12px 20px;
+    font-size: .85rem;
+    min-height: 44px;
+  }
+  .scroll-top { bottom: 16px; right: 16px; width: 42px; height: 42px; }
+  .site-navbar .logo-text { font-size: 1rem; }
+  .footer-brand { font-size: 1rem; }
+}
+
+/* ── PWA Safe Areas (notch / home-bar) ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .site-navbar {
+    padding-top: env(safe-area-inset-top);
+  }
+  .site-footer {
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
+  }
+  .scroll-top {
+    bottom: calc(28px + env(safe-area-inset-bottom));
+    right:  calc(28px + env(safe-area-inset-right));
+  }
+}
+
+/* ── Minimum 44 px touch targets ── */
+.nav-links a,
+.btn-login, .btn-register, .btn-theme,
+.hamburger,
+.social-link {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* override min-width for text links so they don't stretch */
+.nav-links a, .btn-login, .btn-register { min-width: unset; }
 }
