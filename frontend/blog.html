@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog & Updates | EduPortal</title>
+  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('ep-theme')||'dark');</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/shared.css"/>
+  <style>
+    /* Featured post */
+    .featured-post{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-lg);overflow:hidden;margin-top:32px;}
+    .featured-img{width:100%;height:320px;object-fit:cover;}
+    .featured-body{padding:32px 32px 32px 0;}
+    .featured-cat{display:inline-block;background:var(--btn-bg);color:var(--btn-color);font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:12px;}
+    .featured-title{font-family:var(--font-head);font-size:1.55rem;font-weight:800;color:var(--card-heading);line-height:1.3;margin-bottom:12px;}
+    .featured-desc{font-size:.88rem;color:var(--card-text-muted);line-height:1.75;margin-bottom:18px;}
+    .post-meta{display:flex;gap:16px;font-size:.78rem;color:var(--text-muted);flex-wrap:wrap;}
+    .post-meta i{margin-right:3px;}
+    /* Category tabs */
+    .cat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 20px;}
+    .cat-tab{background:var(--surface);border:1px solid var(--card-border);color:var(--text-muted);font-size:.82rem;font-weight:600;padding:7px 18px;border-radius:20px;cursor:pointer;transition:var(--transition);}
+    .cat-tab.active,.cat-tab:hover{background:var(--btn-bg);color:var(--btn-color);border-color:var(--btn-bg);}
+    /* Blog grid */
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:12px;}
+    .blog-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition);cursor:pointer;}
+    .blog-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);}
+    .blog-img{width:100%;height:190px;object-fit:cover;}
+    .blog-body{padding:20px;}
+    .blog-cat{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--link);margin-bottom:8px;}
+    .blog-title{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--card-heading);line-height:1.4;margin-bottom:8px;}
+    .blog-excerpt{font-size:.82rem;color:var(--card-text-muted);line-height:1.65;margin-bottom:14px;}
+    .blog-footer{display:flex;align-items:center;justify-content:space-between;}
+    .blog-author{display:flex;align-items:center;gap:8px;}
+    .blog-avatar{width:28px;height:28px;border-radius:50%;object-fit:cover;}
+    .blog-author-name{font-size:.78rem;font-weight:600;color:var(--card-text);}
+    .blog-date{font-size:.74rem;color:var(--text-muted);}
+    .blog-read{font-size:.74rem;color:var(--link);font-weight:600;}
+    /* Sidebar */
+    .content-wrap{display:grid;grid-template-columns:1fr 320px;gap:36px;align-items:start;}
+    .sidebar-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-lg);padding:22px;}
+    .sidebar-title{font-family:var(--font-head);font-size:.95rem;font-weight:700;color:var(--card-heading);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--divider);}
+    .sidebar-post{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--divider);}
+    .sidebar-post:last-child{border-bottom:none;}
+    .sidebar-post-img{width:60px;height:50px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+    .sidebar-post-title{font-size:.82rem;font-weight:600;color:var(--card-heading);line-height:1.35;margin-bottom:4px;}
+    .sidebar-post-date{font-size:.73rem;color:var(--text-muted);}
+    .topic-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+    /* Newsletter */
+    .newsletter{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-lg);padding:44px 40px;text-align:center;margin-top:56px;}
+    .newsletter h3{font-family:var(--font-head);font-size:1.5rem;font-weight:800;color:var(--card-heading);margin-bottom:10px;}
+    .newsletter p{font-size:.88rem;color:var(--text-muted);margin-bottom:24px;}
+    .newsletter-form{display:flex;gap:12px;max-width:440px;margin:0 auto;}
+    .newsletter-form input{flex:1;}
+    @media(max-width:1024px){.content-wrap{grid-template-columns:1fr;}.featured-post{grid-template-columns:1fr;}.featured-body{padding:24px;}.featured-img{height:220px;}}
+    @media(max-width:600px){.newsletter-form{flex-direction:column;}.newsletter{padding:28px 18px;}}
+  </style>
+</head>
+<body>
+<nav class="site-navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="index.html"><div class="brand-icon">🎓</div><span class="brand-text">Edu<span>Portal</span></span></a>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="bi bi-house-fill"></i> Home</a></li>
+      <li><a href="colleges_section.html"><i class="bi bi-buildings-fill"></i> Colleges</a></li>
+      <li><a href="cutoff.html"><i class="bi bi-bar-chart-fill"></i> Cutoffs</a></li>
+      <li><a href="courses.html"><i class="bi bi-book-fill"></i> Courses</a></li>
+      <li><a href="admission.html"><i class="bi bi-file-earmark-text"></i> Admission</a></li>
+      <li><a href="counselling.html"><i class="bi bi-calendar2-check"></i> Counselling</a></li>
+      <li><a href="blog.html" class="active"><i class="bi bi-newspaper"></i> Blog</a></li>
+      <li><a href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
+      <li><a href="contact.html"><i class="bi bi-telephone"></i> Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="themeToggle" onclick="toggleTheme()"></button>
+      <a href="auth.html" class="btn-login">Login</a>
+      <a href="auth.html#register" class="btn-register">Register Free</a>
+    </div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu">
+    <a href="index.html"><i class="bi bi-house-fill me-2"></i>Home</a>
+    <a href="colleges_section.html"><i class="bi bi-buildings-fill me-2"></i>Colleges</a>
+    <a href="cutoff.html"><i class="bi bi-bar-chart-fill me-2"></i>Cutoffs</a>
+    <a href="courses.html"><i class="bi bi-book-fill me-2"></i>Courses</a>
+    <a href="admission.html"><i class="bi bi-file-earmark-text me-2"></i>Admission</a>
+    <a href="counselling.html"><i class="bi bi-calendar2-check me-2"></i>Counselling</a>
+    <a href="blog.html" class="active"><i class="bi bi-newspaper me-2"></i>Blog</a>
+    <a href="about.html"><i class="bi bi-info-circle me-2"></i>About</a>
+    <a href="contact.html"><i class="bi bi-telephone me-2"></i>Contact</a>
+    <div class="mob-actions">
+      <a href="auth.html" class="btn-login" style="flex:1;text-align:center;">Login</a>
+      <a href="auth.html#register" class="btn-register" style="flex:1;text-align:center;">Register</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:64px 24px 48px;text-align:center;">
+  <div class="hero-badge"><i class="bi bi-newspaper me-1"></i> Blog & Updates</div>
+  <h1>Stay Ahead with <span>Expert Insights</span></h1>
+  <p>Exam news, admission tips, scholarship alerts, college reviews and career guidance — all in one place.</p>
+  <div style="max-width:520px;margin:28px auto 0;display:flex;gap:0;">
+    <input class="input-ep" type="search" placeholder="Search articles, tips, colleges…" id="blogSearch" style="border-radius:var(--radius-md) 0 0 var(--radius-md);flex:1;"/>
+    <button class="btn-ep" style="border-radius:0 var(--radius-md) var(--radius-md) 0;padding:0 22px;" onclick="searchBlog()"><i class="bi bi-search"></i></button>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section">
+  <div class="section-inner">
+    <!-- Featured Post -->
+    <span class="section-label"><i class="bi bi-star-fill me-1"></i> Featured</span>
+    <div class="featured-post">
+      <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=720&q=80" alt="Top Colleges" class="featured-img"/>
+      <div class="featured-body">
+        <span class="featured-cat">Exam News</span>
+        <h2 class="featured-title">JEE Advanced 2026 Results Out: Check Your Rank, Category Cutoffs & What's Next</h2>
+        <p class="featured-desc">The IIT Bombay has declared JEE Advanced 2026 results. Here's a full breakdown of the topper list, category-wise cutoffs, and a step-by-step guide to the JoSAA counselling process starting June 20.</p>
+        <div class="post-meta">
+          <span><i class="bi bi-person-fill"></i> Aryansh Mehta</span>
+          <span><i class="bi bi-calendar3"></i> Jun 10, 2026</span>
+          <span><i class="bi bi-clock"></i> 8 min read</span>
+          <span><i class="bi bi-eye"></i> 1.2L views</span>
+        </div>
+        <a href="#" class="btn-ep" style="margin-top:20px;display:inline-flex;">Read Full Article <i class="bi bi-arrow-right ms-2"></i></a>
+      </div>
+    </div>
+
+    <!-- Category Tabs + Grid -->
+    <div style="margin-top:48px;">
+      <span class="section-label"><i class="bi bi-grid-3x3-gap-fill me-1"></i> All Articles</span>
+      <h2 class="section-title" style="margin-bottom:0;">Latest from EduPortal</h2>
+      <div class="cat-tabs" id="catTabs">
+        <button class="cat-tab active" onclick="filterCat(this,'all')">All</button>
+        <button class="cat-tab" onclick="filterCat(this,'exam')">Exam News</button>
+        <button class="cat-tab" onclick="filterCat(this,'admission')">Admission Tips</button>
+        <button class="cat-tab" onclick="filterCat(this,'scholarship')">Scholarships</button>
+        <button class="cat-tab" onclick="filterCat(this,'career')">Careers</button>
+        <button class="cat-tab" onclick="filterCat(this,'review')">College Reviews</button>
+      </div>
+
+      <div class="content-wrap">
+        <!-- Blog Cards -->
+        <div>
+          <div class="blog-grid" id="blogGrid">
+            <!-- Card 1 -->
+            <div class="blog-card" data-cat="exam">
+              <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&q=80" alt="JEE Main" class="blog-img"/>
+              <div class="blog-body">
+                <div class="blog-cat">Exam News</div>
+                <h3 class="blog-title">JEE Main Session 2 Analysis: Paper was Moderate — Maths Tricky, Physics Easy</h3>
+                <p class="blog-excerpt">A comprehensive paper analysis from our expert faculty, expected good attempts and score vs percentile mapping for all paper sets.</p>
+                <div class="blog-footer">
+                  <div class="blog-author"><img src="https://randomuser.me/api/portraits/men/88.jpg" class="blog-avatar" alt="author"/><div><div class="blog-author-name">Rohan Kulkarni</div><div class="blog-date">May 28, 2026</div></div></div>
+                  <span class="blog-read">6 min read</span>
+                </div>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="blog-card" data-cat="admission">
+              <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=500&q=80" alt="Admission" class="blog-img"/>
+              <div class="blog-body">
+                <div class="blog-cat">Admission Tips</div>
+                <h3 class="blog-title">JoSAA 2026 Choice Filling: The Ultimate Strategy to Lock Your Dream IIT/NIT</h3>
+                <p class="blog-excerpt">How to order your choices optimally, understanding locking vs floating options, and when to upgrade or stay put in each round.</p>
+                <div class="blog-footer">
+                  <div class="blog-author"><img src="https://randomuser.me/api/portraits/women/44.jpg" class="blog-avatar" alt="author"/><div><div class="blog-author-name">Divya Iyer</div><div class="blog-date">Jun 15, 2026</div></div></div>
+                  <span class="blog-read">12 min read</span>
+                </div>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="blog-card" data-cat="scholarship">
+              <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&q=80" alt="Scholarship" class="blog-img"/>
+              <div class="blog-body">
+                <div class="blog-cat">Scholarships</div>
+                <h3 class="blog-title">Top 10 Government Scholarships for Engineering Students 2026-27 — Full List & How to Apply</h3>
+                <p class="blog-excerpt">Central Sector Scheme, AICTE Pragati, Prime Minister's Special Scholarship and 7 more — eligibility, amounts, and application deadlines.</p>
+                <div class="blog-footer">
+                  <div class="blog-author"><img src="https://randomuser.me/api/portraits/women/65.jpg" class="blog-avatar" alt="author"/><div><div class="blog-author-name">Ananya Singh</div><div class="blog-date">May 12, 2026</div></div></div>
+                  <span class="blog-read">9 min read</span>
+                </div>
+              </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="blog-card" data-cat="career">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Career" class="blog-img"/>
+              <div class="blog-body">
+                <div class="blog-cat">Careers</div>
+                <h3 class="blog-title">CSE vs AI/ML in 2026: Which Branch Has Better Placements and Future Scope?</h3>
+                <p class="blog-excerpt">A data-driven comparison of average packages, top recruiters, global opportunities and the impact of AI on software engineering roles.</p>
+                <div class="blog-footer">
+                  <div class="blog-author"><img src="https://randomuser.me/api/portraits/men/32.jpg" class="blog-avatar" alt="author"/><div><div class="blog-author-name">Suresh Pillai</div><div class="blog-date">Apr 30, 2026</div></div></div>
+                  <span class="blog-read">10 min read</span>
+                </div>
+              </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="blog-card" data-cat="review">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/IIT_Bombay_Main_Gate.jpg/640px-IIT_Bombay_Main_Gate.jpg" alt="IIT Bombay" class="blog-img" onerror="this.src='https://images.unsplash.com/photo-1562774053-701939374585?w=500&q=80'"/>
+              <div class="blog-body">
+                <div class="blog-cat">College Review</div>
+                <h3 class="blog-title">IIT Bombay 2026 Review: Campus Life, Placements, Hostel & What Students Really Think</h3>
+                <p class="blog-excerpt">An honest, student-written review covering academics, internship culture, faculty, infrastructure and the social life at India's #1 ranked institute.</p>
+                <div class="blog-footer">
+                  <div class="blog-author"><img src="https://randomuser.me/api/portraits/men/55.jpg" class="blog-avatar" alt="author"/><div><div class="blog-author-name">Rajan Sharma</div><div class="blog-date">Mar 20, 2026</div></div></div>
+                  <span class="blog-read">15 min read</span>
+                </div>
+              </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="blog-card" data-cat="admission">
+              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80" alt="NEET Counselling" class="blog-img"/>
+              <div class="blog-body">
+                <div class="blog-cat">Admission Tips</div>
+                <h3 class="blog-title">NEET UG Counselling 2026 Dates, Rounds, and All-India Quota Process Explained</h3>
+                <p class="blog-excerpt">Everything about MCC counselling rounds, AIQ vs state quota seats, deemed university registration and how to check your allotment result.</p>
+                <div class="blog-footer">
+                  <div class="blog-author"><img src="https://randomuser.me/api/portraits/women/44.jpg" class="blog-avatar" alt="author"/><div><div class="blog-author-name">Divya Iyer</div><div class="blog-date">Jun 8, 2026</div></div></div>
+                  <span class="blog-read">11 min read</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:36px;">
+            <button class="btn-ep-outline" style="padding:12px 32px;"><i class="bi bi-arrow-down-circle me-2"></i>Load More Articles</button>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside>
+          <div class="sidebar-card" style="margin-bottom:20px;">
+            <div class="sidebar-title"><i class="bi bi-fire me-2" style="color:#f97316;"></i>Trending Now</div>
+            <div class="sidebar-post">
+              <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=120&q=60" class="sidebar-post-img" alt="trend"/>
+              <div><div class="sidebar-post-title">JEE Advanced 2026 Topper Interview: 99.8 Percentile Strategy</div><div class="sidebar-post-date">Jun 12, 2026 · 7 min read</div></div>
+            </div>
+            <div class="sidebar-post">
+              <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=120&q=60" class="sidebar-post-img" alt="trend"/>
+              <div><div class="sidebar-post-title">NEET 2026 Cut-off Prediction Based on This Year's Paper</div><div class="sidebar-post-date">Jun 5, 2026 · 5 min read</div></div>
+            </div>
+            <div class="sidebar-post">
+              <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=120&q=60" class="sidebar-post-img" alt="trend"/>
+              <div><div class="sidebar-post-title">10 Easy Scholarships Every 12th Pass Student Can Apply</div><div class="sidebar-post-date">May 22, 2026 · 8 min read</div></div>
+            </div>
+            <div class="sidebar-post">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=60" class="sidebar-post-img" alt="trend"/>
+              <div><div class="sidebar-post-title">Top 5 Emerging Engineering Branches to Watch in 2026</div><div class="sidebar-post-date">Apr 18, 2026 · 6 min read</div></div>
+            </div>
+          </div>
+          <div class="sidebar-card" style="margin-bottom:20px;">
+            <div class="sidebar-title"><i class="bi bi-tags-fill me-2"></i>Popular Topics</div>
+            <div class="topic-tags">
+              <span class="tag-ep">JEE Advanced</span><span class="tag-ep">NEET 2026</span><span class="tag-ep">IIT Rankings</span><span class="tag-ep">CAT 2026</span><span class="tag-ep">MBA Abroad</span><span class="tag-ep">Scholarships</span><span class="tag-ep">JoSAA</span><span class="tag-ep">NIT vs BITS</span><span class="tag-ep">CLAT</span><span class="tag-ep">Engineering Jobs</span>
+            </div>
+          </div>
+          <div class="sidebar-card" style="text-align:center;">
+            <div class="sidebar-title"><i class="bi bi-person-check-fill me-2"></i>Free Counselling</div>
+            <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:16px;">Confused about college selection? Talk to an expert — first session is free!</p>
+            <a href="counselling.html" class="btn-ep" style="width:100%;justify-content:center;">Book Free Session</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section" style="background:var(--bg2);">
+  <div class="section-inner">
+    <div class="newsletter" style="max-width:700px;margin:0 auto;">
+      <h3>Never Miss an Important Update</h3>
+      <p>Join 5,00,000+ students getting exam alerts, cutoff updates, scholarship news and admission tips straight to their inbox.</p>
+      <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+        <input class="input-ep" type="email" placeholder="your@email.com" required/>
+        <button class="btn-ep" type="submit" style="white-space:nowrap;"><i class="bi bi-send-fill me-1"></i> Subscribe</button>
+      </form>
+      <p style="font-size:.76rem;color:var(--text-muted);margin-top:12px;">No spam. Unsubscribe any time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand"><a class="brand" href="index.html"><div class="brand-icon">🎓</div><span class="brand-text">Edu<span>Portal</span></span></a><p>India's most trusted platform for college discovery and admission guidance.</p></div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="colleges_section.html">Top Colleges</a></li><li><a href="cutoff.html">Cutoff Data</a></li><li><a href="courses.html">Courses</a></li><li><a href="admission.html">Admission Guide</a></li><li><a href="counselling.html">Counselling</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="about.html#faq">FAQs</a></li><li><a href="#">Scholarships</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 EduPortal. All rights reserved.</p><div class="social-links"><a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a><a href="#" class="social-link"><i class="bi bi-instagram"></i></a><a href="#" class="social-link"><i class="bi bi-linkedin"></i></a></div></div>
+  </div>
+</footer>
+<button class="scroll-top" title="Back to top"><i class="bi bi-arrow-up"></i></button>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+function filterCat(btn, cat) {
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.blog-card').forEach(c=>{
+    c.style.display = (cat==='all'||c.dataset.cat===cat) ? '' : 'none';
+  });
+}
+function searchBlog() {
+  const q = document.getElementById('blogSearch').value.toLowerCase().trim();
+  if(!q) return;
+  showToast('Searching for: '+q, 'info');
+}
+function subscribeNewsletter(e) {
+  e.preventDefault();
+  showToast('🎉 You\'re subscribed! Welcome to EduPortal Updates.', 'success');
+  e.target.reset();
+}
+</script>
+</body>
+</html>

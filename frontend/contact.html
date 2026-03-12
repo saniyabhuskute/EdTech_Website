@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Contact Us | EduPortal</title>
+	<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('ep-theme')||'dark');</script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="css/shared.css"/>
+	<style>
+		.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:start;margin-top:40px;}
+		.info-cards{display:flex;flex-direction:column;gap:16px;}
+		.info-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-lg);padding:22px 24px;display:flex;gap:16px;align-items:flex-start;transition:var(--transition);}
+		.info-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+		.info-icon{width:44px;height:44px;border-radius:var(--radius-md);background:var(--btn-bg);color:var(--btn-color);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+		.info-text h4{font-size:.9rem;font-weight:700;color:var(--card-heading);margin-bottom:3px;}
+		.info-text p{font-size:.83rem;color:var(--card-text-muted);margin:0;}
+		.info-text a{color:var(--link);font-weight:600;font-size:.85rem;}
+		/* Form */
+		.form-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-lg);padding:36px;}
+		.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+		.form-field{display:flex;flex-direction:column;gap:6px;}
+		.form-field.full{grid-column:1/-1;}
+		.form-label{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);}
+		/* Map */
+		.map-placeholder{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-lg);height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--text-muted);margin-top:16px;}
+		.map-placeholder i{font-size:2.5rem;color:var(--link);}
+		/* Social */
+		.social-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;}
+		.social-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-md);padding:16px;text-align:center;cursor:pointer;transition:var(--transition);}
+		.social-card:hover{border-color:var(--btn-bg);transform:translateY(-3px);}
+		.social-card i{font-size:1.4rem;margin-bottom:6px;display:block;}
+		.social-card span{font-size:.75rem;font-weight:600;color:var(--card-text);}
+		/* FAQ quick */
+		.faq-quick{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px;}
+		.faq-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-md);padding:20px;}
+		.faq-item h4{font-size:.88rem;font-weight:700;color:var(--card-heading);margin-bottom:6px;}
+		.faq-item p{font-size:.81rem;color:var(--card-text-muted);}
+		@media(max-width:900px){.contact-grid{grid-template-columns:1fr;}.form-grid{grid-template-columns:1fr;}.faq-quick{grid-template-columns:1fr;}.social-grid{grid-template-columns:repeat(2,1fr);}}
+	</style>
+</head>
+<body>
+<nav class="site-navbar">
+	<div class="navbar-inner">
+		<a class="brand" href="index.html"><div class="brand-icon">🎓</div><span class="brand-text">Edu<span>Portal</span></span></a>
+		<ul class="nav-links">
+			<li><a href="index.html"><i class="bi bi-house-fill"></i> Home</a></li>
+			<li><a href="colleges_section.html"><i class="bi bi-buildings-fill"></i> Colleges</a></li>
+			<li><a href="cutoff.html"><i class="bi bi-bar-chart-fill"></i> Cutoffs</a></li>
+			<li><a href="courses.html"><i class="bi bi-book-fill"></i> Courses</a></li>
+			<li><a href="admission.html"><i class="bi bi-file-earmark-text"></i> Admission</a></li>
+			<li><a href="counselling.html"><i class="bi bi-calendar2-check"></i> Counselling</a></li>
+			<li><a href="blog.html"><i class="bi bi-newspaper"></i> Blog</a></li>
+			<li><a href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
+			<li><a href="contact.html" class="active"><i class="bi bi-telephone"></i> Contact</a></li>
+		</ul>
+		<div class="nav-actions">
+			<button class="btn-theme" id="themeToggle" onclick="toggleTheme()"></button>
+			<a href="auth.html" class="btn-login">Login</a>
+			<a href="auth.html#register" class="btn-register">Register Free</a>
+		</div>
+		<button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+	</div>
+	<div class="mobile-menu">
+		<a href="index.html"><i class="bi bi-house-fill me-2"></i>Home</a>
+		<a href="colleges_section.html"><i class="bi bi-buildings-fill me-2"></i>Colleges</a>
+		<a href="cutoff.html"><i class="bi bi-bar-chart-fill me-2"></i>Cutoffs</a>
+		<a href="courses.html"><i class="bi bi-book-fill me-2"></i>Courses</a>
+		<a href="admission.html"><i class="bi bi-file-earmark-text me-2"></i>Admission</a>
+		<a href="counselling.html"><i class="bi bi-calendar2-check me-2"></i>Counselling</a>
+		<a href="blog.html"><i class="bi bi-newspaper me-2"></i>Blog</a>
+		<a href="about.html"><i class="bi bi-info-circle me-2"></i>About</a>
+		<a href="contact.html" class="active"><i class="bi bi-telephone me-2"></i>Contact</a>
+		<div class="mob-actions">
+			<a href="auth.html" class="btn-login" style="flex:1;text-align:center;">Login</a>
+			<a href="auth.html#register" class="btn-register" style="flex:1;text-align:center;">Register</a>
+		</div>
+	</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:64px 24px 48px;">
+	<div class="hero-badge"><i class="bi bi-telephone-fill me-1"></i> Get in Touch</div>
+	<h1>We're Here to <span>Help You</span></h1>
+	<p>Have a question about admissions, colleges or our platform? Our team responds within 4 hours on working days.</p>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="section">
+	<div class="section-inner">
+		<div class="contact-grid">
+			<!-- Left: Info -->
+			<div>
+				<span class="section-label"><i class="bi bi-info-circle-fill me-1"></i> Contact Info</span>
+				<h2 class="section-title" style="margin-bottom:24px;">Reach Out to Us</h2>
+				<div class="info-cards">
+					<div class="info-card">
+						<div class="info-icon"><i class="bi bi-telephone-fill"></i></div>
+						<div class="info-text">
+							<h4>Phone Support</h4>
+							<a href="tel:+919876543210">+91 98765 43210</a>
+							<p>Mon–Sat, 9 AM – 7 PM IST</p>
+						</div>
+					</div>
+					<div class="info-card">
+						<div class="info-icon"><i class="bi bi-envelope-fill"></i></div>
+						<div class="info-text">
+							<h4>Email Us</h4>
+							<a href="mailto:support@eduportal.in">support@eduportal.in</a>
+							<p>We reply within 4 hours</p>
+						</div>
+					</div>
+					<div class="info-card">
+						<div class="info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+						<div class="info-text">
+							<h4>Our Office</h4>
+							<p>EduPortal Pvt. Ltd., Level 5, Inspire BKC<br>Bandra Kurla Complex, Mumbai – 400 051<br>Maharashtra, India</p>
+						</div>
+					</div>
+					<div class="info-card">
+						<div class="info-icon"><i class="bi bi-clock-fill"></i></div>
+						<div class="info-text">
+							<h4>Working Hours</h4>
+							<p>Monday – Friday: 9:00 AM – 7:00 PM<br>Saturday: 10:00 AM – 5:00 PM<br>Sunday: Closed</p>
+						</div>
+					</div>
+				</div>
+				<!-- Map placeholder -->
+				<div class="map-placeholder">
+					<i class="bi bi-geo-alt-fill"></i>
+					<span style="font-weight:600;font-size:.9rem;">Bandra Kurla Complex, Mumbai</span>
+					<a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn-ep-outline" style="padding:7px 18px;font-size:.8rem;"><i class="bi bi-map me-1"></i>Open in Google Maps</a>
+				</div>
+				<!-- Social -->
+				<div style="margin-top:28px;">
+					<h3 style="font-size:.95rem;font-weight:700;color:var(--card-heading);margin-bottom:4px;">Follow us on Social Media</h3>
+					<div class="social-grid">
+						<a href="#" class="social-card" style="text-decoration:none;"><i class="bi bi-twitter-x" style="color:#e7e9ea;"></i><span>Twitter / X</span></a>
+						<a href="#" class="social-card" style="text-decoration:none;"><i class="bi bi-instagram" style="color:#e1306c;"></i><span>Instagram</span></a>
+						<a href="#" class="social-card" style="text-decoration:none;"><i class="bi bi-linkedin" style="color:#0a66c2;"></i><span>LinkedIn</span></a>
+						<a href="#" class="social-card" style="text-decoration:none;"><i class="bi bi-youtube" style="color:#ff0000;"></i><span>YouTube</span></a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Right: Form -->
+			<div>
+				<div class="form-card">
+					<h3 style="font-family:var(--font-head);font-size:1.25rem;font-weight:800;color:var(--card-heading);margin-bottom:6px;">Send Us a Message</h3>
+					<p style="font-size:.85rem;color:var(--text-muted);margin-bottom:28px;">We'll get back to you as soon as possible.</p>
+					<form id="contactForm" onsubmit="submitContact(event)" novalidate>
+						<div class="form-grid">
+							<div class="form-field">
+								<label class="form-label">First Name *</label>
+								<input class="input-ep" type="text" id="firstName" placeholder="Aryansh" required/>
+							</div>
+							<div class="form-field">
+								<label class="form-label">Last Name *</label>
+								<input class="input-ep" type="text" id="lastName" placeholder="Mehta" required/>
+							</div>
+							<div class="form-field">
+								<label class="form-label">Email Address *</label>
+								<input class="input-ep" type="email" id="contactEmail" placeholder="you@email.com" required/>
+							</div>
+							<div class="form-field">
+								<label class="form-label">Phone Number</label>
+								<input class="input-ep" type="tel" id="contactPhone" placeholder="+91 XXXXX XXXXX"/>
+							</div>
+							<div class="form-field full">
+								<label class="form-label">Subject *</label>
+								<select class="select-ep" id="contactSubject" required>
+									<option value="">Select a subject…</option>
+									<option>Admission Query</option>
+									<option>Counselling Booking</option>
+									<option>College Information</option>
+									<option>Cutoff / Rank Predictor</option>
+									<option>Technical Issue</option>
+									<option>Partnership / Media</option>
+									<option>Other</option>
+								</select>
+							</div>
+							<div class="form-field full">
+								<label class="form-label">Message *</label>
+								<textarea class="input-ep" id="contactMsg" rows="5" placeholder="Tell us how we can help you…" style="resize:vertical;" required></textarea>
+							</div>
+						</div>
+						<div id="formError" style="color:#ef4444;font-size:.82rem;margin-top:12px;display:none;"></div>
+						<div style="display:flex;gap:14px;align-items:center;margin-top:22px;flex-wrap:wrap;">
+							<button type="submit" class="btn-ep" style="padding:13px 30px;"><i class="bi bi-send-fill me-1"></i> Send Message</button>
+							<button type="reset" class="btn-ep-outline" style="padding:13px 24px;">Clear</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- FAQ Quick -->
+<section class="section" style="background:var(--bg2);">
+	<div class="section-inner section-center">
+		<span class="section-label"><i class="bi bi-question-circle-fill me-1"></i> Quick Answers</span>
+		<h2 class="section-title">Frequently Asked Questions</h2>
+		<div class="faq-quick" style="max-width:900px;margin:0 auto;">
+			<div class="faq-item"><h4>How quickly will you respond?</h4><p>We aim to respond to all email queries within 4 working hours. Phone support is available Mon–Sat, 9 AM to 7 PM.</p></div>
+			<div class="faq-item"><h4>Is the first counselling session really free?</h4><p>Yes! Your first 30-minute session with any of our counsellors is completely free — no credit card needed.</p></div>
+			<div class="faq-item"><h4>How do I report a technical issue?</h4><p>Select "Technical Issue" in the subject dropdown and describe the problem. Include your browser and OS for faster resolution.</p></div>
+			<div class="faq-item"><h4>Can I collaborate with EduPortal?</h4><p>We welcome partnerships with colleges, coaching institutes, and educational publishers. Select "Partnership / Media" in the form.</p></div>
+		</div>
+		<div style="margin-top:28px;text-align:center;">
+			<a href="about.html#faq" class="btn-ep-outline"><i class="bi bi-list-ul me-1"></i> See All FAQs</a>
+		</div>
+	</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+	<div class="footer-inner">
+		<div class="footer-grid">
+			<div class="footer-brand"><a class="brand" href="index.html"><div class="brand-icon">🎓</div><span class="brand-text">Edu<span>Portal</span></span></a><p>India's most trusted platform for college discovery and admission guidance.</p></div>
+			<div class="footer-col"><h4>Explore</h4><ul><li><a href="colleges_section.html">Top Colleges</a></li><li><a href="cutoff.html">Cutoff Data</a></li><li><a href="courses.html">Courses</a></li><li><a href="admission.html">Admission Guide</a></li><li><a href="counselling.html">Counselling</a></li></ul></div>
+			<div class="footer-col"><h4>Resources</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="about.html#faq">FAQs</a></li><li><a href="#">Scholarships</a></li></ul></div>
+			<div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+		</div>
+		<div class="footer-bottom"><p>© 2026 EduPortal. All rights reserved.</p><div class="social-links"><a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a><a href="#" class="social-link"><i class="bi bi-instagram"></i></a><a href="#" class="social-link"><i class="bi bi-linkedin"></i></a></div></div>
+	</div>
+</footer>
+<button class="scroll-top" title="Back to top"><i class="bi bi-arrow-up"></i></button>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+function submitContact(e) {
+	e.preventDefault();
+	const err = document.getElementById('formError');
+	const subj = document.getElementById('contactSubject').value;
+	if(!subj){err.textContent='Please select a subject.';err.style.display='block';return;}
+	err.style.display='none';
+	showToast('✅ Message sent! We\'ll respond within 4 hours.', 'success');
+	e.target.reset();
+}
+</script>
+</body>
+</html>
