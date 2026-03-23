@@ -55,7 +55,8 @@
     .newsletter-form{display:flex;gap:12px;max-width:440px;margin:0 auto;}
     .newsletter-form input{flex:1;}
     @media(max-width:1024px){.content-wrap{grid-template-columns:1fr;}.featured-post{grid-template-columns:1fr;}.featured-body{padding:24px;}.featured-img{height:220px;}}
-    @media(max-width:600px){.newsletter-form{flex-direction:column;}.newsletter{padding:28px 18px;}}
+    @media(max-width:768px){.blog-grid{grid-template-columns:1fr;}.cat-tabs{gap:6px;}.cat-tab{padding:6px 14px;font-size:.78rem;}.featured-title{font-size:1.2rem;}}
+    @media(max-width:600px){.newsletter-form{flex-direction:column;}.newsletter{padding:28px 18px;}.featured-body{padding:18px;}.blog-body{padding:16px;}.blog-img{height:160px;}.featured-img{height:180px;}}
   </style>
 </head>
 <body>
@@ -75,6 +76,7 @@
     </ul>
     <div class="nav-actions">
       <button class="btn-theme" id="themeToggle" onclick="toggleTheme()"></button>
+      <a href="admin.html" class="btn-login" title="Admin Panel"><i class="bi bi-shield-lock-fill"></i></a>
       <a href="auth.html" class="btn-login">Login</a>
       <a href="auth.html#register" class="btn-register">Register Free</a>
     </div>
@@ -91,6 +93,7 @@
     <a href="about.html"><i class="bi bi-info-circle me-2"></i>About</a>
     <a href="contact.html"><i class="bi bi-telephone me-2"></i>Contact</a>
     <div class="mob-actions">
+      <a href="admin.html" class="btn-login" style="flex:1;text-align:center;">Admin</a>
       <a href="auth.html" class="btn-login" style="flex:1;text-align:center;">Login</a>
       <a href="auth.html#register" class="btn-register" style="flex:1;text-align:center;">Register</a>
     </div>

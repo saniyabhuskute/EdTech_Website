@@ -31,8 +31,13 @@
 		.value-text p{font-size:.8rem;color:var(--card-text-muted);line-height:1.6;}
 		.partner-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;margin-top:32px;}
 		.partner-badge{background:var(--surface2);border:1px solid var(--card-border);border-radius:10px;padding:12px 24px;font-size:.85rem;font-weight:600;color:var(--card-text-muted);}
-		@media(max-width:900px){.mvv-grid{grid-template-columns:1fr;}.team-grid{grid-template-columns:repeat(2,1fr);}}
-		@media(max-width:600px){.team-grid{grid-template-columns:1fr;}}
+		.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+		.story-img-wrap{position:relative;}
+		.story-img-wrap img{border-radius:var(--radius-lg);width:100%;aspect-ratio:4/3;object-fit:cover;box-shadow:var(--shadow-lg);}
+		.story-badge{position:absolute;bottom:-20px;left:-20px;background:var(--btn-bg);color:var(--btn-color);border-radius:14px;padding:18px 22px;box-shadow:var(--shadow-md);}
+		@media(max-width:1024px){.story-grid{gap:36px;}}
+		@media(max-width:900px){.mvv-grid{grid-template-columns:1fr;}.team-grid{grid-template-columns:repeat(2,1fr);}.story-grid{grid-template-columns:1fr;gap:32px;}.story-badge{position:relative;bottom:auto;left:auto;display:inline-block;margin-top:12px;}}
+		@media(max-width:600px){.team-grid{grid-template-columns:1fr;}.values-grid{grid-template-columns:1fr !important;}.partner-row{gap:10px;}.partner-badge{padding:10px 16px;font-size:.78rem;}}
 	</style>
 </head>
 <body>
@@ -52,6 +57,7 @@
 		</ul>
 		<div class="nav-actions">
 			<button class="btn-theme" id="themeToggle" onclick="toggleTheme()"></button>
+			<a href="admin.html" class="btn-login" title="Admin Panel"><i class="bi bi-shield-lock-fill"></i></a>
 			<a href="auth.html" class="btn-login">Login</a>
 			<a href="auth.html#register" class="btn-register">Register Free</a>
 		</div>
@@ -68,6 +74,7 @@
 		<a href="about.html" class="active"><i class="bi bi-info-circle me-2"></i>About</a>
 		<a href="contact.html"><i class="bi bi-telephone me-2"></i>Contact</a>
 		<div class="mob-actions">
+			<a href="admin.html" class="btn-login" style="flex:1;text-align:center;">Admin</a>
 			<a href="auth.html" class="btn-login" style="flex:1;text-align:center;">Login</a>
 			<a href="auth.html#register" class="btn-register" style="flex:1;text-align:center;">Register</a>
 		</div>
@@ -93,7 +100,7 @@
 
 <!-- OUR STORY -->
 <section class="section">
-	<div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+	<div class="section-inner story-grid">
 		<div>
 			<span class="section-label"><i class="bi bi-book me-1"></i> Our Story</span>
 			<h2 class="section-title">From a Confusion to a Revolution</h2>
@@ -101,9 +108,9 @@
 			<p style="color:var(--text-muted);line-height:1.85;margin-bottom:24px;">Today, EduPortal serves over 2 million students annually, with a dedicated team of 50+ education experts, counsellors and engineers working to democratise quality education guidance across India.</p>
 			<a href="counselling.html" class="btn-ep">Get Free Counselling <i class="bi bi-arrow-right"></i></a>
 		</div>
-		<div style="position:relative;">
-			<img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80&auto=format&fit=crop" alt="Campus" style="border-radius:var(--radius-lg);width:100%;aspect-ratio:4/3;object-fit:cover;box-shadow:var(--shadow-lg);"/>
-			<div style="position:absolute;bottom:-20px;left:-20px;background:var(--btn-bg);color:var(--btn-color);border-radius:14px;padding:18px 22px;box-shadow:var(--shadow-md);">
+		<div class="story-img-wrap">
+			<img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80&auto=format&fit=crop" alt="Campus"/>
+			<div class="story-badge">
 				<div style="font-family:var(--font-head);font-size:1.5rem;font-weight:800;">2M+</div>
 				<div style="font-size:.78rem;font-weight:600;opacity:.8;">Students Guided</div>
 			</div>

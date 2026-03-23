@@ -53,7 +53,9 @@
     .pricing-features{list-style:none;text-align:left;margin-bottom:22px;}
     .pricing-features li{font-size:.83rem;color:var(--card-text);padding:6px 0;border-bottom:1px solid var(--divider);display:flex;align-items:center;gap:8px;}
     .pricing-features li i{color:#22c55e;font-size:.8rem;}
-    @media(max-width:900px){.how-grid,.pricing-grid{grid-template-columns:1fr;}.form-grid{grid-template-columns:1fr;}}
+    @media(max-width:900px){.how-grid,.pricing-grid{grid-template-columns:1fr;}.form-grid{grid-template-columns:1fr;}.counsellors-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}}
+    @media(max-width:600px){.counsellors-grid{grid-template-columns:1fr;}.counsellor-img{height:180px;}.pricing-card{padding:22px 18px;}.benefits-grid{grid-template-columns:1fr;}}
+    @media(max-width:480px){.how-card{padding:24px 18px;}.how-icon{font-size:1.3rem;}.pricing-price{font-size:1.6rem;}.booking-wrap{max-width:100%;}}
   </style>
 </head>
 <body>
