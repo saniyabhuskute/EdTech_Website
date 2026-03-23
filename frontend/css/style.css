@@ -1,0 +1,86 @@
+:root{
+--yellow:#F0CB46;
+--mustard:#CCA000;
+--blue:#003566;
+--darkblue:#001D3D;
+--black:#000814;
+}
+
+.college-section{
+background: linear-gradient(135deg,#001D3D,#000814);
+padding:80px 24px;
+}
+
+.section-title{
+color:#F0CB46;
+font-weight:700;
+letter-spacing:1px;
+margin-bottom:50px;
+}
+
+.college-card{
+border:none;
+border-radius:15px;
+overflow:hidden;
+transition:0.4s;
+background:#fff;
+}
+
+.college-card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.college-card:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 40px rgba(0,0,0,0.4);
+}
+
+.college-body{
+padding:20px;
+}
+
+.college-name{
+font-size:clamp(1rem, 2.2vw, 1.25rem);
+font-weight:600;
+color:#001D3D;
+}
+
+.college-location{
+color:#555;
+font-size:0.875rem;
+}
+
+.college-btn{
+background:#F0CB46;
+border:none;
+color:#000;
+font-weight:600;
+margin-top:10px;
+}
+
+.college-btn:hover{
+background:#CCA000;
+color:#000;
+}
+
+.filter-bar{
+background:#003566;
+padding:20px;
+border-radius:10px;
+margin-bottom:40px;
+}
+
+@media(max-width:768px){
+  .college-section{padding:40px 16px;}
+  .section-title{font-size:1.4rem;margin-bottom:30px;}
+  .college-card img{height:180px;}
+  .filter-bar{padding:14px;}
+}
+
+@media(max-width:480px){
+  .college-section{padding:30px 12px;}
+  .college-body{padding:14px;}
+  .college-name{font-size:1rem;}
+}
