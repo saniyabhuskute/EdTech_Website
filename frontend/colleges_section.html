@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/shared.css"/>
 
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}.hero-banner{background:var(--hero-bg,linear-gradient(135deg,var(--oxford) 0%,var(--yale) 60%,#004080));padding:64px 24px 48px;text-align:center;position:relative;overflow:hidden;}.hero-banner::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(240,203,70,.12) 0%,transparent 70%);border-radius:50%;}.hero-banner::after{content:'';position:absolute;bottom:-60px;left:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(240,203,70,.08) 0%,transparent 70%);border-radius:50%;}.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(240,203,70,.15);border:1px solid rgba(240,203,70,.35);color:var(--saffron);font-size:.78rem;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:18px;}.hero-title{font-family:'Poppins',sans-serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:14px;}.hero-title span{color:var(--saffron);position:relative;}.hero-title span::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:3px;background:var(--saffron);border-radius:2px;opacity:.4;}.hero-subtitle{font-size:1rem;color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 32px;line-height:1.6;}.hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;position:relative;z-index:1;}.stat-item{text-align:center;}.stat-number{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:800;color:var(--saffron);display:block;}.stat-label{font-size:.78rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.8px;}.filter-wrapper{background:var(--surface);border-bottom:1px solid var(--card-border);padding:20px 24px;position:sticky;top:68px;z-index:900;}.filter-inner{max-width:1300px;margin:0 auto;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}.filter-search{flex:1 1 280px;position:relative;}.filter-search i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:.95rem;}.filter-search input{width:100%;background:var(--input-bg);border:1.5px solid var(--input-border);color:var(--text);padding:10px 14px 10px 40px;border-radius:var(--radius-sm);font-size:.88rem;transition:var(--transition);outline:0;}.filter-search input::placeholder{color:var(--text-muted);}.filter-search input:focus{border-color:var(--saffron);background:var(--input-focus-bg);}.filter-select{flex:0 1 180px;background:var(--input-bg);border:1.5px solid var(--input-border);color:var(--text);padding:10px 32px 10px 14px;border-radius:var(--radius-sm);font-size:.88rem;outline:0;cursor:pointer;transition:var(--transition);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23F0CB46' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}.filter-select option{background:var(--surface);color:var(--text);}.filter-select:focus{border-color:var(--saffron);}.filter-btn{background:var(--saffron);border:0;color:var(--rich-black);padding:10px 24px;border-radius:var(--radius-sm);font-weight:700;font-size:.88rem;cursor:pointer;transition:var(--transition);white-space:nowrap;}.filter-btn:hover{background:var(--gold);}.colleges-main{max-width:1300px;margin:0 auto;padding:40px 24px 80px;}.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px;}.section-heading{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:4px;}.section-sub{font-size:.88rem;color:var(--text-muted);}.view-all-link{display:inline-flex;align-items:center;gap:6px;color:var(--saffron);text-decoration:none;font-size:.9rem;font-weight:600;border-bottom:1.5px solid transparent;transition:var(--transition);white-space:nowrap;}.view-all-link:hover{border-color:var(--saffron);gap:10px;}.stream-tabs{display:flex;gap:10px;margin-bottom:36px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}.stream-tabs::-webkit-scrollbar{display:none;}.stream-tab{flex-shrink:0;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:rgba(255,255,255,.65);padding:8px 20px;border-radius:30px;font-size:.84rem;font-weight:500;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:6px;}.stream-tab:hover{border-color:rgba(240,203,70,.4);color:var(--saffron);background:rgba(240,203,70,.07);}.stream-tab.active{background:var(--saffron);border-color:var(--saffron);color:var(--rich-black);font-weight:700;}.colleges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px;}.college-card{background:var(--surface);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition);box-shadow:0 4px 20px rgba(0,0,0,.3);display:flex;flex-direction:column;}.college-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 0 1px rgba(240,203,70,.22);}.card-img-wrap{position:relative;height:200px;overflow:hidden;}.card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}.college-card:hover .card-img-wrap img{transform:scale(1.06);}.rank-badge{position:absolute;top:12px;left:12px;background:var(--saffron);color:var(--rich-black);font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:20px;}.approved-badge{position:absolute;top:12px;right:12px;background:rgba(0,29,61,.82);color:var(--saffron);font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:4px;backdrop-filter:blur(4px);}.bookmark-btn{position:absolute;bottom:12px;right:12px;width:32px;height:32px;background:rgba(255,255,255,.92);border:0;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);transition:var(--transition);font-size:.9rem;}.bookmark-btn:hover{color:var(--yale);background:#fff;}.card-body-custom{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column;}.card-college-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}.college-logo{width:52px;height:52px;border-radius:var(--radius-sm);border:1.5px solid #e5e7eb;object-fit:contain;padding:5px;background:#fff;flex-shrink:0;}.college-name{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--card-heading);line-height:1.3;margin-bottom:4px;transition:var(--transition);}.college-card:hover .college-name{color:var(--yale);}.college-location{display:flex;align-items:center;gap:4px;font-size:.8rem;color:var(--text-muted);}.college-location i{color:#e74c3c;font-size:.75rem;}.tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}.tag{font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:20px;}.tag-blue{background:rgba(0,53,102,.08);color:var(--yale);}.tag-gold{background:rgba(204,160,0,.12);color:#876b00;}.college-desc{font-size:.84rem;color:var(--card-text-muted);line-height:1.6;flex:1;margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}.card-footer-custom{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--divider);}.fees-info{font-size:.78rem;color:var(--text-muted);}.fees-info strong{color:var(--card-heading);font-size:.9rem;}.details-link{display:inline-flex;align-items:center;gap:5px;color:var(--yale);font-size:.82rem;font-weight:700;text-decoration:none;letter-spacing:.3px;text-transform:uppercase;transition:var(--transition);}.details-link:hover{color:var(--gold);gap:8px;}.college-card.featured{grid-column:span 2;flex-direction:row;}.college-card.featured .card-img-wrap{width:300px;height:auto;flex-shrink:0;}.pagination-wrap{display:flex;justify-content:center;margin-top:56px;gap:6px;}.page-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;color:rgba(255,255,255,.7);font-size:.88rem;font-weight:500;cursor:pointer;transition:var(--transition);text-decoration:none;}.page-btn:hover{border-color:var(--saffron);color:var(--saffron);}.page-btn.active{background:var(--saffron);border-color:var(--saffron);color:var(--rich-black);font-weight:700;}.page-btn.arrow{padding:0 14px;width:auto;}.scroll-top{position:fixed;bottom:30px;right:30px;width:46px;height:46px;background:var(--saffron);border:0;border-radius:12px;color:var(--rich-black);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(240,203,70,.4);transition:var(--transition);z-index:999;opacity:0;}.scroll-top:hover{background:var(--gold);transform:translateY(-3px);}@media(max-width:900px){.college-card.featured{grid-column:span 1;flex-direction:column;}.college-card.featured .card-img-wrap{width:100%;height:200px;}}@media(max-width:768px){.nav-links,.nav-actions{display:none;}.colleges-grid{grid-template-columns:1fr;}.hero-stats{gap:24px;}.hero-title{font-size:1.7rem;}.filter-wrapper{flex-direction:column;gap:10px;}.stream-tabs{gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}.stream-tab{padding:7px 16px;font-size:.78rem;white-space:nowrap;flex-shrink:0;}}@media(max-width:480px){.hero-section{padding:60px 16px 40px;}.hero-title{font-size:1.3rem;}.hero-stats{flex-direction:column;gap:14px;}.card-img-wrap{height:160px;}.card-info{padding:16px;}.card-info h3{font-size:.92rem;}.page-btn{width:34px;height:34px;font-size:.78rem;}.scroll-top{width:38px;height:38px;bottom:18px;right:18px;font-size:.95rem;}}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}.hero-banner{background:var(--hero-bg,linear-gradient(135deg,var(--oxford) 0%,var(--yale) 60%,#004080));padding:64px 24px 48px;text-align:center;position:relative;overflow:hidden;}.hero-banner::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(240,203,70,.12) 0%,transparent 70%);border-radius:50%;}.hero-banner::after{content:'';position:absolute;bottom:-60px;left:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(240,203,70,.08) 0%,transparent 70%);border-radius:50%;}.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(240,203,70,.15);border:1px solid rgba(240,203,70,.35);color:var(--saffron);font-size:.78rem;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:18px;}.hero-title{font-family:'Poppins',sans-serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:14px;}.hero-title span{color:var(--saffron);position:relative;}.hero-title span::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:3px;background:var(--saffron);border-radius:2px;opacity:.4;}.hero-subtitle{font-size:1rem;color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 32px;line-height:1.6;}.hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;position:relative;z-index:1;}.stat-item{text-align:center;}.stat-number{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:800;color:var(--saffron);display:block;}.stat-label{font-size:.78rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.8px;}.filter-wrapper{background:var(--surface);border-bottom:1px solid var(--card-border);padding:20px 24px;position:sticky;top:68px;z-index:900;}.filter-inner{max-width:1300px;margin:0 auto;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}.filter-search{flex:1 1 280px;position:relative;}.filter-search i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:.95rem;}.filter-search input{width:100%;background:var(--input-bg);border:1.5px solid var(--input-border);color:var(--text);padding:10px 14px 10px 40px;border-radius:var(--radius-sm);font-size:.88rem;transition:var(--transition);outline:0;}.filter-search input::placeholder{color:var(--text-muted);}.filter-search input:focus{border-color:var(--saffron);background:var(--input-focus-bg);}.filter-select{flex:0 1 180px;background:var(--input-bg);border:1.5px solid var(--input-border);color:var(--text);padding:10px 32px 10px 14px;border-radius:var(--radius-sm);font-size:.88rem;outline:0;cursor:pointer;transition:var(--transition);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23F0CB46' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}.filter-select option{background:var(--surface);color:var(--text);}.filter-select:focus{border-color:var(--saffron);}.filter-btn{background:var(--saffron);border:0;color:var(--rich-black);padding:10px 24px;border-radius:var(--radius-sm);font-weight:700;font-size:.88rem;cursor:pointer;transition:var(--transition);white-space:nowrap;}.filter-btn:hover{background:var(--gold);}.colleges-main{max-width:1300px;margin:0 auto;padding:40px 24px 80px;}.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px;}.section-heading{font-family:'Poppins',sans-serif;font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:4px;}.section-sub{font-size:.88rem;color:var(--text-muted);}.view-all-link{display:inline-flex;align-items:center;gap:6px;color:var(--saffron);text-decoration:none;font-size:.9rem;font-weight:600;border-bottom:1.5px solid transparent;transition:var(--transition);white-space:nowrap;}.view-all-link:hover{border-color:var(--saffron);gap:10px;}.stream-tabs{display:flex;gap:10px;margin-bottom:36px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}.stream-tabs::-webkit-scrollbar{display:none;}.stream-tab{flex-shrink:0;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:rgba(255,255,255,.65);padding:8px 20px;border-radius:30px;font-size:.84rem;font-weight:500;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:6px;}.stream-tab:hover{border-color:rgba(240,203,70,.4);color:var(--saffron);background:rgba(240,203,70,.07);}.stream-tab.active{background:var(--saffron);border-color:var(--saffron);color:var(--rich-black);font-weight:700;}.colleges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px;}.college-card{background:var(--surface);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition);box-shadow:0 4px 20px rgba(0,0,0,.3);display:flex;flex-direction:column;}.college-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 0 1px rgba(240,203,70,.22);}.card-img-wrap{position:relative;height:200px;overflow:hidden;}.card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}.college-card:hover .card-img-wrap img{transform:scale(1.06);}.rank-badge{position:absolute;top:12px;left:12px;background:var(--saffron);color:var(--rich-black);font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:20px;}.approved-badge{position:absolute;top:12px;right:12px;background:rgba(0,29,61,.82);color:var(--saffron);font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:4px;backdrop-filter:blur(4px);}.bookmark-btn{position:absolute;bottom:12px;right:12px;width:32px;height:32px;background:rgba(255,255,255,.92);border:0;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);transition:var(--transition);font-size:.9rem;}.bookmark-btn:hover{color:var(--yale);background:#fff;}.card-body-custom{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column;}.card-college-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}.college-logo{width:52px;height:52px;border-radius:var(--radius-sm);border:1.5px solid #e5e7eb;object-fit:contain;padding:5px;background:#fff;flex-shrink:0;}.college-name{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--card-heading);line-height:1.3;margin-bottom:4px;transition:var(--transition);}.college-card:hover .college-name{color:var(--yale);}.college-location{display:flex;align-items:center;gap:4px;font-size:.8rem;color:var(--text-muted);}.college-location i{color:#e74c3c;font-size:.75rem;}.tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}.tag{font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:20px;}.tag-blue{background:rgba(0,53,102,.08);color:var(--yale);}.tag-gold{background:rgba(204,160,0,.12);color:#876b00;}.college-desc{font-size:.84rem;color:var(--card-text-muted);line-height:1.6;flex:1;margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}.card-footer-custom{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--divider);}.fees-info{font-size:.78rem;color:var(--text-muted);}.fees-info strong{color:var(--card-heading);font-size:.9rem;}.details-link{display:inline-flex;align-items:center;gap:5px;color:var(--yale);font-size:.82rem;font-weight:700;text-decoration:none;letter-spacing:.3px;text-transform:uppercase;transition:var(--transition);}.details-link:hover{color:var(--gold);gap:8px;}.college-card.featured{grid-column:span 2;flex-direction:row;}.college-card.featured .card-img-wrap{width:300px;height:auto;flex-shrink:0;}.empty-state{padding:48px 20px;text-align:center;border:1px dashed var(--card-border);border-radius:var(--radius-lg);background:var(--surface);}.empty-state h3{font-family:'Poppins',sans-serif;font-size:1.1rem;color:var(--heading);margin-bottom:6px;}.empty-state p{font-size:.9rem;color:var(--text-muted);margin:0;}.scroll-top{position:fixed;bottom:30px;right:30px;width:46px;height:46px;background:var(--saffron);border:0;border-radius:12px;color:var(--rich-black);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(240,203,70,.4);transition:var(--transition);z-index:999;opacity:0;}.scroll-top:hover{background:var(--gold);transform:translateY(-3px);}@media(max-width:900px){.college-card.featured{grid-column:span 1;flex-direction:column;}.college-card.featured .card-img-wrap{width:100%;height:200px;}}@media(max-width:768px){.nav-links,.nav-actions{display:none;}.colleges-grid{grid-template-columns:1fr;}.hero-stats{gap:24px;}.hero-title{font-size:1.7rem;}.filter-wrapper{flex-direction:column;gap:10px;}.stream-tabs{gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}.stream-tab{padding:7px 16px;font-size:.78rem;white-space:nowrap;flex-shrink:0;}}@media(max-width:480px){.hero-section{padding:60px 16px 40px;}.hero-title{font-size:1.3rem;}.hero-stats{flex-direction:column;gap:14px;}.card-img-wrap{height:160px;}.card-info{padding:16px;}.card-info h3{font-size:.92rem;}.scroll-top{width:38px;height:38px;bottom:18px;right:18px;font-size:.95rem;}}
   </style>
 </head>
 <body>
@@ -33,9 +33,11 @@
         <li><a href="blog.html"><i class="bi bi-newspaper"></i> Blog</a></li>
         <li><a href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
         <li><a href="contact.html"><i class="bi bi-telephone"></i> Contact</a></li>
+        <li><a href="admin.html"><i class="bi bi-shield-lock-fill"></i> Admin</a></li>
       </ul>
       <div class="nav-actions">
         <button class="btn-theme" id="themeToggle" onclick="toggleTheme()"></button>
+        <a href="admin.html" class="btn-login" title="Admin Panel"><i class="bi bi-shield-lock-fill"></i></a>
         <a href="auth.html" class="btn-login">Login</a>
         <a href="auth.html#register" class="btn-register">Register Free</a>
       </div>
@@ -51,7 +53,9 @@
       <a href="blog.html"><i class="bi bi-newspaper me-2"></i>Blog</a>
       <a href="about.html"><i class="bi bi-info-circle me-2"></i>About</a>
       <a href="contact.html"><i class="bi bi-telephone me-2"></i>Contact</a>
+      <a href="admin.html"><i class="bi bi-shield-lock-fill me-2"></i>Admin</a>
       <div class="mob-actions">
+        <a href="admin.html" class="btn-login" style="flex:1;text-align:center;">Admin</a>
         <a href="auth.html" class="btn-login" style="flex:1;text-align:center;">Login</a>
         <a href="auth.html#register" class="btn-register" style="flex:1;text-align:center;">Register</a>
       </div>
@@ -76,34 +80,33 @@
     <div class="filter-inner">
       <div class="filter-search">
         <i class="bi bi-search"></i>
-        <input type="text" placeholder="Search colleges by name or keyword…" />
+        <input type="text" id="searchInput" placeholder="Search colleges by name or keyword..." />
       </div>
-      <select class="filter-select">
-        <option>📍 All States</option>
-        <option>Maharashtra</option>
-        <option>Delhi NCR</option>
-        <option>Karnataka</option>
-        <option>Tamil Nadu</option>
-        <option>Rajasthan</option>
-        <option>Telangana</option>
+      <select class="filter-select" id="stateFilter">
+        <option value="all">All States</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Delhi NCR">Delhi NCR</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Telangana">Telangana</option>
       </select>
-      <select class="filter-select">
-        <option>🎓 All Streams</option>
-        <option>Engineering</option>
-        <option>Management (MBA)</option>
-        <option>Medical</option>
-        <option>Law</option>
-        <option>Arts & Science</option>
-        <option>Commerce</option>
+      <select class="filter-select" id="streamFilter">
+        <option value="all">All Streams</option>
+        <option value="Engineering">Engineering</option>
+        <option value="Management">Management</option>
+        <option value="Medical">Medical</option>
+        <option value="Law">Law</option>
+        <option value="Arts & Science">Arts & Science</option>
+        <option value="Commerce">Commerce</option>
       </select>
-      <select class="filter-select">
-        <option>🏆 Sort By</option>
-        <option>Top Ranked</option>
-        <option>Fees: Low to High</option>
-        <option>Fees: High to Low</option>
-        <option>Newest First</option>
+      <select class="filter-select" id="sortFilter">
+        <option value="rank">Sort By: Top Ranked</option>
+        <option value="fees-asc">Fees: Low to High</option>
+        <option value="fees-desc">Fees: High to Low</option>
+        <option value="newest">Newest First</option>
       </select>
-      <button class="filter-btn"><i class="bi bi-funnel-fill me-1"></i> Apply Filters</button>
+      <button class="filter-btn" id="applyFiltersBtn"><i class="bi bi-funnel-fill me-1"></i> Apply Filters</button>
     </div>
   </div>
 
@@ -114,293 +117,24 @@
     <div class="section-header">
       <div>
         <h2 class="section-heading">Top Institutions Across All Streams</h2>
-        <p class="section-sub">Showing 9 of 10,000+ colleges &nbsp;·&nbsp; Sorted by ranking</p>
+        <p class="section-sub" id="resultsSummary">Showing 0 colleges</p>
       </div>
-      <a href="#" class="view-all-link">View All Colleges <i class="bi bi-arrow-right"></i></a>
+      <a href="admin.html" class="view-all-link">Open Admin Panel <i class="bi bi-arrow-right"></i></a>
     </div>
 
     <!-- Stream Tabs -->
     <div class="stream-tabs">
-      <button class="stream-tab active"><i class="bi bi-grid-3x3-gap"></i> All</button>
-      <button class="stream-tab"><i class="bi bi-gear"></i> Engineering</button>
-      <button class="stream-tab"><i class="bi bi-briefcase"></i> Management</button>
-      <button class="stream-tab"><i class="bi bi-heart-pulse"></i> Medical</button>
-      <button class="stream-tab"><i class="bi bi-scale"></i> Law</button>
-      <button class="stream-tab"><i class="bi bi-palette"></i> Arts & Science</button>
-      <button class="stream-tab"><i class="bi bi-calculator"></i> Commerce</button>
-      <button class="stream-tab"><i class="bi bi-camera"></i> Design</button>
+      <button class="stream-tab active" data-stream="all"><i class="bi bi-grid-3x3-gap"></i> All</button>
+      <button class="stream-tab" data-stream="Engineering"><i class="bi bi-gear"></i> Engineering</button>
+      <button class="stream-tab" data-stream="Management"><i class="bi bi-briefcase"></i> Management</button>
+      <button class="stream-tab" data-stream="Medical"><i class="bi bi-heart-pulse"></i> Medical</button>
+      <button class="stream-tab" data-stream="Law"><i class="bi bi-scale"></i> Law</button>
+      <button class="stream-tab" data-stream="Arts & Science"><i class="bi bi-palette"></i> Arts & Science</button>
+      <button class="stream-tab" data-stream="Commerce"><i class="bi bi-calculator"></i> Commerce</button>
     </div>
 
     <!-- COLLEGE CARDS GRID -->
-    <div class="colleges-grid">
-
-      <!-- Card 1 – Featured (2-col wide) -->
-      <div class="college-card featured">
-        <div class="card-img-wrap">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/IITBMainBuildingCROP.jpg?width=900" alt="IIT Bombay" />
-          <span class="rank-badge">🏆 NIRF Rank #1</span>
-          <span class="approved-badge"><i class="bi bi-patch-check-fill"></i> NAAC A++</span>
-          <button class="bookmark-btn"><i class="bi bi-bookmark"></i></button>
-        </div>
-        <div class="card-body-custom">
-          <div class="card-college-header">
-            <img class="college-logo" src="https://commons.wikimedia.org/wiki/Special:FilePath/IIT_Bombay_color_logo.svg?width=120" alt="IIT Bombay Logo" />
-            <div>
-              <div class="college-name">Indian Institute of Technology Bombay</div>
-              <div class="college-location"><i class="bi bi-geo-alt-fill"></i> Powai, Mumbai, Maharashtra</div>
-            </div>
-          </div>
-          <div class="tag-row">
-            <span class="tag tag-blue">Autonomous</span>
-            <span class="tag tag-gold">Deemed University</span>
-            <span class="tag tag-blue">Engineering</span>
-          </div>
-          <p class="college-desc">IIT Bombay is one of India's premier engineering institutions, globally recognized for world-class research, state-of-the-art infrastructure, and exceptional alumni who lead major corporations and research labs worldwide.</p>
-          <div class="card-footer-custom">
-            <div class="fees-info">Avg. Fees <strong>₹2.2 L/yr</strong></div>
-            <a href="#" class="details-link">More Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="college-card">
-        <div class="card-img-wrap">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/COEP_Main_building.JPG?width=900" alt="COEP" />
-          <span class="rank-badge">NIRF Rank #21</span>
-          <span class="approved-badge"><i class="bi bi-patch-check-fill"></i> NAAC A+</span>
-          <button class="bookmark-btn"><i class="bi bi-bookmark"></i></button>
-        </div>
-        <div class="card-body-custom">
-          <div class="card-college-header">
-            <div class="college-logo" style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:#f3f4f6;">🏛️</div>
-            <div>
-              <div class="college-name">COEP Technological University</div>
-              <div class="college-location"><i class="bi bi-geo-alt-fill"></i> Shivajinagar, Pune</div>
-            </div>
-          </div>
-          <div class="tag-row">
-            <span class="tag tag-blue">Autonomous</span>
-            <span class="tag tag-gold">Engineering</span>
-          </div>
-          <p class="college-desc">One of the oldest engineering colleges in Asia, COEP has a strong legacy of producing industry leaders with robust academics, placements and a vibrant research culture.</p>
-          <div class="card-footer-custom">
-            <div class="fees-info">Avg. Fees <strong>₹1.5 L/yr</strong></div>
-            <a href="#" class="details-link">More Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="college-card">
-        <div class="card-img-wrap">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bits_Clock_tower.jpg?width=900" alt="BITS Pilani" />
-          <span class="rank-badge">NIRF Rank #26</span>
-          <span class="approved-badge"><i class="bi bi-patch-check-fill"></i> NAAC A</span>
-          <button class="bookmark-btn"><i class="bi bi-bookmark"></i></button>
-        </div>
-        <div class="card-body-custom">
-          <div class="card-college-header">
-            <div class="college-logo" style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:#f3f4f6;">🎓</div>
-            <div>
-              <div class="college-name">BITS Pilani</div>
-              <div class="college-location"><i class="bi bi-geo-alt-fill"></i> Pilani, Rajasthan</div>
-            </div>
-          </div>
-          <div class="tag-row">
-            <span class="tag tag-blue">Deemed University</span>
-            <span class="tag tag-gold">Engineering</span>
-          </div>
-          <p class="college-desc">A premier private engineering university renowned for its flexible dual-degree model, highly successful alumni network and top-tier placements at global tech companies.</p>
-          <div class="card-footer-custom">
-            <div class="fees-info">Avg. Fees <strong>₹5.3 L/yr</strong></div>
-            <a href="#" class="details-link">More Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="college-card">
-        <div class="card-img-wrap">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/VIT_University_Main_Building.jpg?width=900" alt="VIT Vellore" />
-          <span class="rank-badge">NIRF Rank #11</span>
-          <span class="approved-badge"><i class="bi bi-patch-check-fill"></i> NAAC A++</span>
-          <button class="bookmark-btn"><i class="bi bi-bookmark"></i></button>
-        </div>
-        <div class="card-body-custom">
-          <div class="card-college-header">
-            <div class="college-logo" style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:#f3f4f6;">🏫</div>
-            <div>
-              <div class="college-name">VIT Vellore</div>
-              <div class="college-location"><i class="bi bi-geo-alt-fill"></i> Vellore, Tamil Nadu</div>
-            </div>
-          </div>
-          <div class="tag-row">
-            <span class="tag tag-blue">Deemed University</span>
-            <span class="tag tag-gold">Private</span>
-          </div>
-          <p class="college-desc">Highly reputed private university known for strong placement records, global industry partnerships and a multicultural campus environment attracting students worldwide.</p>
-          <div class="card-footer-custom">
-            <div class="fees-info">Avg. Fees <strong>₹3.9 L/yr</strong></div>
-            <a href="#" class="details-link">More Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="college-card">
-        <div class="card-img-wrap">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/IIIT_Hyderabad_-_Academic_block.jpg?width=900" alt="IIIT Hyderabad" />
-          <span class="rank-badge">NIRF Rank #42</span>
-          <span class="approved-badge"><i class="bi bi-patch-check-fill"></i> NAAC A</span>
-          <button class="bookmark-btn"><i class="bi bi-bookmark"></i></button>
-        </div>
-        <div class="card-body-custom">
-          <div class="card-college-header">
-            <div class="college-logo" style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:#f3f4f6;">💻</div>
-            <div>
-              <div class="college-name">IIIT Hyderabad</div>
-              <div class="college-location"><i class="bi bi-geo-alt-fill"></i> Gachibowli, Hyderabad</div>
-            </div>
-          </div>
-          <div class="tag-row">
-            <span class="tag tag-blue">Deemed University</span>
-            <span class="tag tag-gold">AI & CS</span>
-          </div>
-          <p class="college-desc">India's leading institute for Artificial Intelligence, Machine Learning and CS research — producing top-tier engineers sought by the world's most prestigious tech companies.</p>
-          <div class="card-footer-custom">
-            <div class="fees-info">Avg. Fees <strong>₹3.2 L/yr</strong></div>
-            <a href="#" class="details-link">More Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="college-card">
-        <div class="card-img-wrap">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/NIT_Trichy_-_Main_Building.jpg?width=900" alt="NIT Trichy" />
-          <span class="rank-badge">NIRF Rank #9</span>
-          <span class="approved-badge"><i class="bi bi-patch-check-fill"></i> NAAC A+</span>
-          <button class="bookmark-btn"><i class="bi bi-bookmark"></i></button>
-        </div>
-        <div class="card-body-custom">
-          <div class="card-college-header">
-            <div class="college-logo" style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:#f3f4f6;">🔬</div>
-            <div>
-              <div class="college-name">NIT Trichy</div>
-              <div class="college-location"><i class="bi bi-geo-alt-fill"></i> Tiruchirappalli, Tamil Nadu</div>
-            </div>
-          </div>
-          <div class="tag-row">
-            <span class="tag tag-blue">Government</span>
-            <span class="tag tag-gold">Engineering</span>
-          </div>
-          <p class="college-desc">Consistently ranked among India's top NITs, celebrated for rigorous academics, vibrant campus life, strong alumni network and outstanding placements with PSUs and MNCs.</p>
-          <div class="card-footer-custom">
-            <div class="fees-info">Avg. Fees <strong>₹1.4 L/yr</strong></div>
-            <a href="#" class="details-link">More Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 7 -->
-      <div class="college-card">
-        <div class="card-img-wrap">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/XLRI_Jamshedpur_Front_Gate.jpg?width=900" alt="XLRI" />
-          <span class="rank-badge">NIRF Rank #5 (Mgmt)</span>
-          <span class="approved-badge"><i class="bi bi-patch-check-fill"></i> NAAC A+</span>
-          <button class="bookmark-btn"><i class="bi bi-bookmark"></i></button>
-        </div>
-        <div class="card-body-custom">
-          <div class="card-college-header">
-            <div class="college-logo" style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:#f3f4f6;">📊</div>
-            <div>
-              <div class="college-name">XLRI – Xavier School of Management</div>
-              <div class="college-location"><i class="bi bi-geo-alt-fill"></i> Jamshedpur, Jharkhand</div>
-            </div>
-          </div>
-          <div class="tag-row">
-            <span class="tag tag-blue">Autonomous</span>
-            <span class="tag tag-gold">Management</span>
-          </div>
-          <p class="college-desc">One of India's most prestigious B-schools with 75+ years of legacy in management education, exceptional faculty, world-class pedagogy and unmatched industry connections.</p>
-          <div class="card-footer-custom">
-            <div class="fees-info">Avg. Fees <strong>₹24 L/yr</strong></div>
-            <a href="#" class="details-link">More Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 8 -->
-      <div class="college-card">
-        <div class="card-img-wrap">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Manipal_University_Main_Building.jpg?width=900" alt="Manipal" />
-          <span class="rank-badge">NIRF Rank #7 (Medical)</span>
-          <span class="approved-badge"><i class="bi bi-patch-check-fill"></i> NAAC A+</span>
-          <button class="bookmark-btn"><i class="bi bi-bookmark"></i></button>
-        </div>
-        <div class="card-body-custom">
-          <div class="card-college-header">
-            <div class="college-logo" style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:#f3f4f6;">🏥</div>
-            <div>
-              <div class="college-name">Manipal Academy of Higher Education</div>
-              <div class="college-location"><i class="bi bi-geo-alt-fill"></i> Manipal, Karnataka</div>
-            </div>
-          </div>
-          <div class="tag-row">
-            <span class="tag tag-blue">Deemed University</span>
-            <span class="tag tag-gold">Medical</span>
-          </div>
-          <p class="college-desc">Asia's premier health science university offering world-class medical education with state-of-the-art hospitals, cutting-edge research centres and globally recognised programmes.</p>
-          <div class="card-footer-custom">
-            <div class="fees-info">Avg. Fees <strong>₹8.5 L/yr</strong></div>
-            <a href="#" class="details-link">More Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 9 -->
-      <div class="college-card">
-        <div class="card-img-wrap">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/National_Law_School_of_India_University,_Bengaluru.jpg?width=900" alt="NLSIU" />
-          <span class="rank-badge">NIRF Rank #1 (Law)</span>
-          <span class="approved-badge"><i class="bi bi-patch-check-fill"></i> NAAC A++</span>
-          <button class="bookmark-btn"><i class="bi bi-bookmark"></i></button>
-        </div>
-        <div class="card-body-custom">
-          <div class="card-college-header">
-            <div class="college-logo" style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:#f3f4f6;">⚖️</div>
-            <div>
-              <div class="college-name">National Law School of India University</div>
-              <div class="college-location"><i class="bi bi-geo-alt-fill"></i> Bengaluru, Karnataka</div>
-            </div>
-          </div>
-          <div class="tag-row">
-            <span class="tag tag-blue">Government</span>
-            <span class="tag tag-gold">Law</span>
-          </div>
-          <p class="college-desc">India's top law school and the gold standard in legal education — NLSIU Bengaluru produces the country's finest legal minds and is the first choice for CLAT toppers every year.</p>
-          <div class="card-footer-custom">
-            <div class="fees-info">Avg. Fees <strong>₹2.7 L/yr</strong></div>
-            <a href="#" class="details-link">More Details <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /colleges-grid -->
-
-    <!-- PAGINATION -->
-    <nav class="pagination-wrap" aria-label="Page navigation">
-      <a href="#" class="page-btn arrow"><i class="bi bi-chevron-left"></i> Prev</a>
-      <a href="#" class="page-btn active">1</a>
-      <a href="#" class="page-btn">2</a>
-      <a href="#" class="page-btn">3</a>
-      <a href="#" class="page-btn">4</a>
-      <a href="#" class="page-btn">5</a>
-      <span class="page-btn" style="border:none;background:none;color:rgba(255,255,255,0.4);cursor:default;">…</span>
-      <a href="#" class="page-btn">48</a>
-      <a href="#" class="page-btn arrow">Next <i class="bi bi-chevron-right"></i></a>
-    </nav>
+    <div class="colleges-grid" id="collegesGrid"></div>
 
   </main>
 
@@ -415,7 +149,7 @@
       <div class="footer-grid">
         <div class="footer-brand"><a class="brand" href="index.html"><div class="brand-icon">🎓</div><span class="brand-text">Edu<span>Portal</span></span></a><p>India's most trusted platform for college discovery and admission guidance.</p></div>
         <div class="footer-col"><h4>Explore</h4><ul><li><a href="colleges_section.html">Top Colleges</a></li><li><a href="cutoff.html">Cutoff Data</a></li><li><a href="courses.html">Courses</a></li><li><a href="admission.html">Admission Guide</a></li><li><a href="counselling.html">Counselling</a></li></ul></div>
-        <div class="footer-col"><h4>Resources</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="about.html#faq">FAQs</a></li><li><a href="#">Scholarships</a></li></ul></div>
+        <div class="footer-col"><h4>Resources</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="about.html#faq">FAQs</a></li><li><a href="#">Scholarships</a></li><li><a href="admin.html">Admin Panel</a></li></ul></div>
         <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
       </div>
       <div class="footer-bottom"><p>© 2026 EduPortal. All rights reserved.</p><div class="social-links"><a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a><a href="#" class="social-link"><i class="bi bi-instagram"></i></a><a href="#" class="social-link"><i class="bi bi-linkedin"></i></a></div></div>
@@ -424,6 +158,7 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/shared.js"></script>
+  <script src="js/college-data.js"></script>
   <script src="js/colleges.js"></script>
 
 </body>

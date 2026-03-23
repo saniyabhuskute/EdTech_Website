@@ -4,126 +4,294 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cutoff Data 2026 | EduPortal</title>
-  <meta name="description" content="Year-wise cutoff data for JEE, MHT-CET, NEET, CAT and CLAT. Filter by college, branch, category and year."/>
+  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('ep-theme')||'dark');</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="css/shared.css"/>
   <style>
-    .cutoff-hero{padding:120px 24px 30px;background:var(--off-white);text-align:center;}
-    .cutoff-hero h1{font-size:2.8rem;font-weight:800;color:var(--gray-900);margin-bottom:14px;}
-    .cutoff-hero h1 span{color:var(--emerald);}
-    .cutoff-hero p{font-size:1.05rem;color:var(--gray-500);max-width:600px;margin:0 auto;line-height:1.7;}
-    .filter-bar{background:var(--white);border-bottom:1px solid var(--gray-100);padding:20px 24px;position:sticky;top:68px;z-index:900;box-shadow:var(--shadow-xs);}
+    .filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 24px;position:sticky;top:68px;z-index:900;}
     .filter-grid{max-width:1300px;margin:0 auto;display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;}
     .filter-group{display:flex;flex-direction:column;gap:5px;flex:1 1 160px;}
-    .filter-label{font-size:.72rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.8px;}
-    .filter-btn{background:var(--emerald);border:0;color:#fff;padding:12px 24px;border-radius:var(--radius-sm);font-weight:700;font-size:.88rem;cursor:pointer;transition:var(--transition);white-space:nowrap;align-self:flex-end;box-shadow:var(--shadow-emerald);}
-    .filter-btn:hover{background:var(--emerald-dark);transform:translateY(-1px);}
+    .filter-label{font-size:.72rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;}
+    .filter-btn{background:var(--btn-bg);border:0;color:var(--btn-color);padding:12px 24px;border-radius:var(--radius-sm);font-weight:700;font-size:.88rem;cursor:pointer;transition:var(--transition);white-space:nowrap;align-self:flex-end;}
+    .filter-btn:hover{background:var(--btn-bg-hover);}
     .cutoff-main{max-width:1300px;margin:0 auto;padding:36px 24px 80px;}
     .result-info{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
-    .result-count{font-size:.88rem;color:var(--gray-500);}
-    .result-count strong{color:var(--gray-900);}
-    .cutoff-table-wrap{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--gray-100);box-shadow:var(--shadow-sm);}
-    table{width:100%;border-collapse:collapse;font-size:.84rem;}
-    thead{background:var(--emerald-dark);}
+    .result-count{font-size:.88rem;color:var(--text-muted);}
+    .result-count strong{color:var(--text);}
+    .cutoff-table-wrap{overflow-x:auto;border-radius:var(--radius-lg);border:1px solid var(--table-border);}
+    table{width:100%;border-collapse:collapse;font-size:.86rem;}
+    thead tr{background:var(--table-header);}
     thead th{padding:14px 16px;color:#fff;font-weight:600;text-align:left;white-space:nowrap;font-size:.82rem;letter-spacing:.3px;}
-    tbody tr:nth-child(odd){background:var(--white);}
-    tbody tr:nth-child(even){background:var(--off-white);}
-    tbody tr:hover{background:var(--emerald-light);}
-    tbody td{padding:13px 16px;color:var(--gray-700);border-bottom:1px solid var(--gray-100);vertical-align:middle;}
-    .college-cell{font-weight:600;color:var(--gray-900);}
-    .branch-cell{color:var(--gray-500);}
-    .cat-badge{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:12px;}
-    .cat-general{background:rgba(15,157,138,.1);color:var(--emerald-dark);}
-    .cat-obc{background:rgba(59,130,246,.1);color:#1d4ed8;}
-    .cat-sc{background:rgba(34,197,94,.1);color:#15803d;}
-    .cat-st{background:rgba(249,115,22,.1);color:#c2410c;}
+    tbody tr:nth-child(odd){background:var(--table-row-odd);}
+    tbody tr:nth-child(even){background:var(--table-row-even);}
+    tbody tr:hover{background:var(--table-hover);}
+    tbody td{padding:13px 16px;color:var(--card-text);border-bottom:1px solid var(--table-border);vertical-align:middle;}
+    .college-cell{font-weight:600;color:var(--card-heading);}
+    .branch-cell{color:var(--text-muted);}
+    .cutoff-val{font-weight:700;color:var(--link);font-size:.9rem;}
+    .trend-up{color:#22c55e;}
+    .trend-down{color:#ef4444;}
+    .trend-same{color:var(--text-muted);}
+    .cat-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.7rem;font-weight:700;}
+    .cat-gen{background:rgba(240,203,70,.12);color:var(--saffron);}
+    .cat-obc{background:rgba(59,130,246,.12);color:#60a5fa;}
+    .cat-sc{background:rgba(34,197,94,.12);color:#4ade80;}
+    .cat-st{background:rgba(249,115,22,.12);color:#fb923c;}
+    [data-theme="light"] .cat-gen{background:rgba(204,160,0,.12);color:#8B6800;}
+    [data-theme="light"] .cat-obc{background:rgba(59,130,246,.1);color:#1d4ed8;}
+    [data-theme="light"] .cat-sc{background:rgba(34,197,94,.1);color:#15803d;}
+    [data-theme="light"] .cat-st{background:rgba(249,115,22,.1);color:#c2410c;}
     .exam-tabs{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;}
-    .exam-tab{background:var(--white);border:1.5px solid var(--gray-100);color:var(--gray-500);padding:8px 20px;border-radius:30px;font-size:.84rem;font-weight:500;cursor:pointer;transition:var(--transition);}
-    .exam-tab:hover{border-color:var(--emerald);color:var(--emerald);}
-    .exam-tab.active{background:var(--emerald);border-color:var(--emerald);color:#fff;font-weight:700;box-shadow:var(--shadow-emerald);}
-    .info-banner{background:var(--emerald-light);border:1px solid rgba(15,157,138,.15);border-radius:var(--radius-sm);padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:10px;font-size:.84rem;color:var(--emerald-dark);}
-    .info-banner i{color:var(--emerald);font-size:1rem;flex-shrink:0;}
-    .trend-section{margin-top:48px;}
-    .trend-bar-group{margin-top:20px;}
-    .trend-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-    .trend-label{min-width:50px;font-size:.82rem;font-weight:600;color:var(--gray-500);text-align:right;}
-    .trend-bar-bg{flex:1;height:28px;background:var(--off-white);border-radius:20px;overflow:hidden;border:1px solid var(--gray-100);}
-    .trend-bar{height:100%;background:var(--emerald);border-radius:20px;display:flex;align-items:center;justify-content:flex-end;padding:0 12px;font-size:.72rem;font-weight:700;color:#fff;transition:width 1.2s ease;}
-    .trend-value{min-width:80px;font-size:.82rem;color:var(--gray-500);text-align:left;}
-    .disclaimer{margin-top:36px;padding:20px 24px;background:var(--off-white);border-radius:var(--radius-sm);font-size:.78rem;color:var(--gray-400);line-height:1.6;border:1px solid var(--gray-100);}
-    @media(max-width:768px){.filter-grid{flex-direction:column;}.filter-group{flex:1 1 100%;}.exam-tabs{gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}.exam-tab{padding:6px 14px;font-size:.78rem;white-space:nowrap;flex-shrink:0;}.cutoff-main{padding:24px 16px 60px;}.result-info{flex-direction:column;align-items:flex-start;}.cutoff-hero h1{font-size:2rem;}}
+    .exam-tab{background:var(--surface2);border:1.5px solid var(--card-border);color:var(--text-muted);padding:8px 20px;border-radius:30px;font-size:.84rem;font-weight:500;cursor:pointer;transition:var(--transition);}
+    .exam-tab:hover{border-color:var(--link);color:var(--link);}
+    .exam-tab.active{background:var(--btn-bg);border-color:var(--btn-bg);color:var(--btn-color);font-weight:700;}
+    .info-banner{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:10px;font-size:.84rem;color:var(--text-muted);}
+    .info-banner i{color:var(--saffron);font-size:1rem;flex-shrink:0;}
+    @media(max-width:768px){.filter-grid{flex-direction:column;}.filter-group{flex:1 1 100%;}.exam-tabs{gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}.exam-tab{padding:6px 14px;font-size:.78rem;white-space:nowrap;flex-shrink:0;}.cutoff-main{padding:24px 16px 60px;}.result-info{flex-direction:column;align-items:flex-start;}}
     @media(max-width:480px){.filter-bar{padding:14px 16px;}.info-banner{flex-direction:column;padding:12px 14px;font-size:.78rem;}.cutoff-table-wrap{border-radius:var(--radius-sm);}table{font-size:.78rem;}thead th{padding:10px 12px;font-size:.74rem;}tbody td{padding:10px 12px;}}
   </style>
 </head>
 <body>
-<nav class="site-navbar"><div class="navbar-inner"><a class="brand" href="index.html"><div class="brand-icon">🎓</div><span class="brand-text">Edu<span>Portal</span></span></a><ul class="nav-links"><li><a href="index.html"><i class="bi bi-house"></i> Home</a></li><li><a href="colleges_section.html"><i class="bi bi-buildings"></i> Colleges</a></li><li><a href="cutoff.html"><i class="bi bi-bar-chart"></i> Cutoffs</a></li><li><a href="courses.html"><i class="bi bi-book"></i> Courses</a></li><li><a href="admission.html"><i class="bi bi-file-earmark-text"></i> Admission</a></li><li><a href="counselling.html"><i class="bi bi-calendar2-check"></i> Counselling</a></li><li><a href="blog.html"><i class="bi bi-newspaper"></i> Blog</a></li><li><a href="about.html"><i class="bi bi-info-circle"></i> About</a></li><li><a href="contact.html"><i class="bi bi-telephone"></i> Contact</a></li></ul><div class="nav-actions"><a href="auth.html" class="btn-login">Login</a><a href="auth.html#register" class="btn-register">Get Started</a></div><button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div><div class="mobile-menu"><a href="index.html"><i class="bi bi-house me-2"></i>Home</a><a href="colleges_section.html"><i class="bi bi-buildings me-2"></i>Colleges</a><a href="cutoff.html"><i class="bi bi-bar-chart me-2"></i>Cutoffs</a><a href="courses.html"><i class="bi bi-book me-2"></i>Courses</a><a href="admission.html"><i class="bi bi-file-earmark-text me-2"></i>Admission</a><a href="counselling.html"><i class="bi bi-calendar2-check me-2"></i>Counselling</a><a href="blog.html"><i class="bi bi-newspaper me-2"></i>Blog</a><a href="about.html"><i class="bi bi-info-circle me-2"></i>About</a><a href="contact.html"><i class="bi bi-telephone me-2"></i>Contact</a><div class="mob-actions"><a href="auth.html" class="btn-login" style="flex:1;text-align:center;">Login</a><a href="auth.html#register" class="btn-register" style="flex:1;text-align:center;">Get Started</a></div></div></nav>
+<nav class="site-navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="index.html"><div class="brand-icon">🎓</div><span class="brand-text">Edu<span>Portal</span></span></a>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="bi bi-house-fill"></i> Home</a></li>
+      <li><a href="colleges_section.html"><i class="bi bi-buildings-fill"></i> Colleges</a></li>
+      <li><a href="cutoff.html" class="active"><i class="bi bi-bar-chart-fill"></i> Cutoffs</a></li>
+      <li><a href="courses.html"><i class="bi bi-book-fill"></i> Courses</a></li>
+      <li><a href="admission.html"><i class="bi bi-file-earmark-text"></i> Admission</a></li>
+      <li><a href="counselling.html"><i class="bi bi-calendar2-check"></i> Counselling</a></li>
+      <li><a href="blog.html"><i class="bi bi-newspaper"></i> Blog</a></li>
+      <li><a href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
+      <li><a href="contact.html"><i class="bi bi-telephone"></i> Contact</a></li>
+      <li><a href="admin.html"><i class="bi bi-shield-lock-fill"></i> Admin</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-theme" id="themeToggle" onclick="toggleTheme()"></button>
+      <a href="auth.html" class="btn-login">Login</a>
+      <a href="auth.html#register" class="btn-register">Register Free</a>
+    </div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu">
+    <a href="index.html"><i class="bi bi-house-fill me-2"></i>Home</a>
+    <a href="colleges_section.html"><i class="bi bi-buildings-fill me-2"></i>Colleges</a>
+    <a href="cutoff.html" class="active"><i class="bi bi-bar-chart-fill me-2"></i>Cutoffs</a>
+    <a href="courses.html"><i class="bi bi-book-fill me-2"></i>Courses</a>
+    <a href="admission.html"><i class="bi bi-file-earmark-text me-2"></i>Admission</a>
+    <a href="counselling.html"><i class="bi bi-calendar2-check me-2"></i>Counselling</a>
+    <a href="blog.html"><i class="bi bi-newspaper me-2"></i>Blog</a>
+    <a href="about.html"><i class="bi bi-info-circle me-2"></i>About</a>
+    <a href="contact.html"><i class="bi bi-telephone me-2"></i>Contact</a>
+    <a href="admin.html"><i class="bi bi-shield-lock-fill me-2"></i>Admin</a>
+    <div class="mob-actions">
+      <a href="auth.html" class="btn-login" style="flex:1;text-align:center;">Login</a>
+      <a href="auth.html#register" class="btn-register" style="flex:1;text-align:center;">Register</a>
+    </div>
+  </div>
+</nav>
 
-<section class="cutoff-hero">
-  <div class="hero-badge reveal"><i class="bi bi-bar-chart-fill"></i> Cutoff Data</div>
-  <h1 class="reveal">Year-Wise <span>Cutoff Data</span><br>for Every College</h1>
-  <p class="reveal">Official cutoff data from JoSAA, NTA and state counselling bodies. Filter by exam, college, branch and category.</p>
+<!-- HERO -->
+<section class="hero" style="padding:64px 24px 48px;">
+  <div class="hero-badge"><i class="bi bi-bar-chart-fill me-1"></i> Cutoff Data</div>
+  <h1>Year-wise <span>Cutoff Data</span><br>for All Exams</h1>
+  <p>Explore historical cutoff ranks and percentiles for JEE, MHT-CET, NEET, CAT and more. Filter by college, branch, category and year.</p>
 </section>
 
+<!-- FILTER BAR -->
 <div class="filter-bar">
   <div class="filter-grid">
-    <div class="filter-group"><span class="filter-label">Exam</span><select class="select-ep"><option>JEE Main (JoSAA)</option><option>JEE Advanced</option><option>MHT-CET</option><option>NEET UG</option><option>CAT</option></select></div>
-    <div class="filter-group"><span class="filter-label">College</span><select class="select-ep"><option>All NITs</option><option>IIT Bombay</option><option>IIT Delhi</option><option>NIT Trichy</option><option>NIT Warangal</option><option>BITS Pilani</option></select></div>
-    <div class="filter-group"><span class="filter-label">Branch</span><select class="select-ep"><option>Computer Science</option><option>Electrical</option><option>Mechanical</option><option>Electronics</option><option>Civil</option></select></div>
-    <div class="filter-group"><span class="filter-label">Category</span><select class="select-ep"><option>General</option><option>OBC-NCL</option><option>SC</option><option>ST</option><option>EWS</option></select></div>
-    <div class="filter-group"><span class="filter-label">Year</span><select class="select-ep"><option>2025</option><option>2024</option><option>2023</option><option>2022</option></select></div>
-    <button class="filter-btn"><i class="bi bi-funnel-fill me-1"></i> Apply Filters</button>
+    <div class="filter-group">
+      <span class="filter-label">Exam</span>
+      <select class="select-ep" id="examFilter">
+        <option value="jee">JEE Main / Advanced</option>
+        <option value="mhtcet">MHT-CET</option>
+        <option value="neet">NEET UG</option>
+        <option value="cat">CAT (MBA)</option>
+        <option value="clat">CLAT (Law)</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">College</span>
+      <select class="select-ep" id="collegeFilter">
+        <option value="">All Colleges</option>
+        <option>IIT Bombay</option>
+        <option>IIT Delhi</option>
+        <option>NIT Trichy</option>
+        <option>COEP Pune</option>
+        <option>VIT Vellore</option>
+        <option>BITS Pilani</option>
+        <option>IIM Ahmedabad</option>
+        <option>NLSIU Bengaluru</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Branch / Program</span>
+      <select class="select-ep" id="branchFilter">
+        <option value="">All Branches</option>
+        <option>Computer Science (CSE)</option>
+        <option>Electronics & Comm (ECE)</option>
+        <option>Mechanical Engineering</option>
+        <option>Civil Engineering</option>
+        <option>Information Technology</option>
+        <option>Chemical Engineering</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Category</span>
+      <select class="select-ep" id="catFilter">
+        <option value="">All Categories</option>
+        <option>General (Open)</option>
+        <option>OBC-NCL</option>
+        <option>SC</option>
+        <option>ST</option>
+        <option>EWS</option>
+        <option>PwD</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Year</span>
+      <select class="select-ep" id="yearFilter">
+        <option>2025</option>
+        <option>2024</option>
+        <option>2023</option>
+        <option>2022</option>
+        <option>2021</option>
+      </select>
+    </div>
+    <button class="filter-btn" onclick="applyFilters()"><i class="bi bi-funnel-fill me-1"></i> Apply</button>
   </div>
 </div>
 
-<div class="cutoff-main">
+<!-- MAIN -->
+<main class="cutoff-main">
+
+  <!-- Exam tabs -->
   <div class="exam-tabs">
-    <button class="exam-tab active">JEE Main (JoSAA)</button>
-    <button class="exam-tab">JEE Advanced</button>
-    <button class="exam-tab">MHT-CET</button>
-    <button class="exam-tab">NEET UG</button>
-    <button class="exam-tab">CAT / MBA</button>
-    <button class="exam-tab">CLAT</button>
+    <button class="exam-tab active" onclick="switchExam(this,'JEE Advanced')">JEE Advanced</button>
+    <button class="exam-tab" onclick="switchExam(this,'JEE Main')">JEE Main</button>
+    <button class="exam-tab" onclick="switchExam(this,'MHT-CET')">MHT-CET</button>
+    <button class="exam-tab" onclick="switchExam(this,'NEET')">NEET UG</button>
+    <button class="exam-tab" onclick="switchExam(this,'CAT')">CAT</button>
+    <button class="exam-tab" onclick="switchExam(this,'CLAT')">CLAT</button>
   </div>
 
-  <div class="info-banner"><i class="bi bi-info-circle-fill"></i> Showing <strong>&nbsp;JoSAA Round 6 closing ranks&nbsp;</strong> for 2025. Data sourced from official JoSAA portal.</div>
+  <div class="info-banner">
+    <i class="bi bi-info-circle-fill"></i>
+    <span>Cutoffs shown are <strong>closing ranks</strong> (last admitted candidate). Data sourced from official JOSAA, MHT-CET cell and college portals. <a href="#" style="color:var(--link);">Learn more about cutoff interpretation →</a></span>
+  </div>
 
-  <div class="result-info"><span class="result-count">Showing <strong>8 results</strong> for Computer Science · General · 2025</span></div>
+  <div class="result-info">
+    <span class="result-count">Showing <strong id="rowCount">15</strong> records for <strong id="examLabel">JEE Advanced 2025</strong></span>
+    <div style="display:flex;gap:10px;">
+      <button class="btn-ep-outline" style="padding:7px 16px;font-size:.8rem;" onclick="downloadCSV()"><i class="bi bi-download me-1"></i> Download CSV</button>
+    </div>
+  </div>
 
   <div class="cutoff-table-wrap">
-    <table>
-      <thead><tr><th>College</th><th>Branch</th><th>Category</th><th>Opening</th><th>Closing</th><th>Year</th></tr></thead>
-      <tbody>
-        <tr><td class="college-cell">IIT Bombay</td><td class="branch-cell">Computer Science & Eng.</td><td><span class="cat-badge cat-general">General</span></td><td>1</td><td>73</td><td>2025</td></tr>
-        <tr><td class="college-cell">IIT Delhi</td><td class="branch-cell">Computer Science & Eng.</td><td><span class="cat-badge cat-general">General</span></td><td>14</td><td>107</td><td>2025</td></tr>
-        <tr><td class="college-cell">IIT Madras</td><td class="branch-cell">Computer Science & Eng.</td><td><span class="cat-badge cat-general">General</span></td><td>26</td><td>132</td><td>2025</td></tr>
-        <tr><td class="college-cell">IIT Kanpur</td><td class="branch-cell">Computer Science & Eng.</td><td><span class="cat-badge cat-general">General</span></td><td>68</td><td>233</td><td>2025</td></tr>
-        <tr><td class="college-cell">IIT Kharagpur</td><td class="branch-cell">Computer Science & Eng.</td><td><span class="cat-badge cat-general">General</span></td><td>92</td><td>354</td><td>2025</td></tr>
-        <tr><td class="college-cell">NIT Trichy</td><td class="branch-cell">Computer Science & Eng.</td><td><span class="cat-badge cat-general">General</span></td><td>2,145</td><td>4,832</td><td>2025</td></tr>
-        <tr><td class="college-cell">NIT Warangal</td><td class="branch-cell">Computer Science & Eng.</td><td><span class="cat-badge cat-general">General</span></td><td>3,221</td><td>6,544</td><td>2025</td></tr>
-        <tr><td class="college-cell">NIT Surathkal</td><td class="branch-cell">Computer Science & Eng.</td><td><span class="cat-badge cat-general">General</span></td><td>2,876</td><td>5,912</td><td>2025</td></tr>
+    <table id="cutoffTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>College</th>
+          <th>Branch / Program</th>
+          <th>Category</th>
+          <th>Round 1</th>
+          <th>Round 2</th>
+          <th>Round 3 (Final)</th>
+          <th>Trend vs 2024</th>
+        </tr>
+      </thead>
+      <tbody id="cutoffBody">
+        <tr><td>1</td><td class="college-cell">IIT Bombay</td><td class="branch-cell">Computer Science (CSE)</td><td><span class="cat-badge cat-gen">General</span></td><td class="cutoff-val">67</td><td class="cutoff-val">89</td><td class="cutoff-val">112</td><td><span class="trend-down"><i class="bi bi-arrow-down-short"></i>18 tighter</span></td></tr>
+        <tr><td>2</td><td class="college-cell">IIT Bombay</td><td class="branch-cell">Computer Science (CSE)</td><td><span class="cat-badge cat-obc">OBC-NCL</span></td><td class="cutoff-val">304</td><td class="cutoff-val">389</td><td class="cutoff-val">430</td><td><span class="trend-down"><i class="bi bi-arrow-down-short"></i>22 tighter</span></td></tr>
+        <tr><td>3</td><td class="college-cell">IIT Bombay</td><td class="branch-cell">Electrical Engineering</td><td><span class="cat-badge cat-gen">General</span></td><td class="cutoff-val">221</td><td class="cutoff-val">310</td><td class="cutoff-val">358</td><td><span class="trend-up"><i class="bi bi-arrow-up-short"></i>15 relaxed</span></td></tr>
+        <tr><td>4</td><td class="college-cell">IIT Delhi</td><td class="branch-cell">Computer Science (CSE)</td><td><span class="cat-badge cat-gen">General</span></td><td class="cutoff-val">98</td><td class="cutoff-val">118</td><td class="cutoff-val">143</td><td><span class="trend-down"><i class="bi bi-arrow-down-short"></i>11 tighter</span></td></tr>
+        <tr><td>5</td><td class="college-cell">IIT Delhi</td><td class="branch-cell">Mechanical Engineering</td><td><span class="cat-badge cat-gen">General</span></td><td class="cutoff-val">892</td><td class="cutoff-val">1102</td><td class="cutoff-val">1289</td><td><span class="trend-up"><i class="bi bi-arrow-up-short"></i>45 relaxed</span></td></tr>
+        <tr><td>6</td><td class="college-cell">IIT Madras</td><td class="branch-cell">Computer Science (CSE)</td><td><span class="cat-badge cat-gen">General</span></td><td class="cutoff-val">104</td><td class="cutoff-val">138</td><td class="cutoff-val">167</td><td><span class="trend-same"><i class="bi bi-dash"></i> Stable</span></td></tr>
+        <tr><td>7</td><td class="college-cell">IIT Madras</td><td class="branch-cell">Electrical Engineering</td><td><span class="cat-badge cat-sc">SC</span></td><td class="cutoff-val">1842</td><td class="cutoff-val">2105</td><td class="cutoff-val">2389</td><td><span class="trend-down"><i class="bi bi-arrow-down-short"></i>120 tighter</span></td></tr>
+        <tr><td>8</td><td class="college-cell">NIT Trichy</td><td class="branch-cell">Computer Science (CSE)</td><td><span class="cat-badge cat-gen">General</span></td><td class="cutoff-val">2100</td><td class="cutoff-val">2680</td><td class="cutoff-val">3102</td><td><span class="trend-down"><i class="bi bi-arrow-down-short"></i>210 tighter</span></td></tr>
+        <tr><td>9</td><td class="college-cell">NIT Trichy</td><td class="branch-cell">Electronics & Comm (ECE)</td><td><span class="cat-badge cat-gen">General</span></td><td class="cutoff-val">3500</td><td class="cutoff-val">4200</td><td class="cutoff-val">4890</td><td><span class="trend-up"><i class="bi bi-arrow-up-short"></i>180 relaxed</span></td></tr>
+        <tr><td>10</td><td class="college-cell">BITS Pilani</td><td class="branch-cell">Computer Science (CSE)</td><td><span class="cat-badge cat-gen">General</span></td><td>–</td><td>–</td><td class="cutoff-val" title="BITSAT Score">348/390</td><td><span class="trend-down"><i class="bi bi-arrow-down-short"></i>3 pts tighter</span></td></tr>
+        <tr><td>11</td><td class="college-cell">BITS Pilani</td><td class="branch-cell">Electrical & Electronics</td><td><span class="cat-badge cat-gen">General</span></td><td>–</td><td>–</td><td class="cutoff-val">335/390</td><td><span class="trend-same"><i class="bi bi-dash"></i> Stable</span></td></tr>
+        <tr><td>12</td><td class="college-cell">COEP Pune</td><td class="branch-cell">Computer Science (CSE)</td><td><span class="cat-badge cat-gen">General</span></td><td>–</td><td class="cutoff-val">98.4%</td><td class="cutoff-val">97.8%</td><td><span class="trend-up"><i class="bi bi-arrow-up-short"></i>0.6% relaxed</span></td></tr>
+        <tr><td>13</td><td class="college-cell">VIT Vellore</td><td class="branch-cell">Computer Science (CSE)</td><td><span class="cat-badge cat-gen">General</span></td><td>–</td><td>–</td><td class="cutoff-val">VITEEE ≥ 85th %ile</td><td><span class="trend-same"><i class="bi bi-dash"></i> Stable</span></td></tr>
+        <tr><td>14</td><td class="college-cell">IIT Bombay</td><td class="branch-cell">Civil Engineering</td><td><span class="cat-badge cat-st">ST</span></td><td class="cutoff-val">4200</td><td class="cutoff-val">5100</td><td class="cutoff-val">5890</td><td><span class="trend-up"><i class="bi bi-arrow-up-short"></i>220 relaxed</span></td></tr>
+        <tr><td>15</td><td class="college-cell">IIT Kharagpur</td><td class="branch-cell">Computer Science (CSE)</td><td><span class="cat-badge cat-gen">General</span></td><td class="cutoff-val">188</td><td class="cutoff-val">245</td><td class="cutoff-val">289</td><td><span class="trend-down"><i class="bi bi-arrow-down-short"></i>9 tighter</span></td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="trend-section reveal">
-    <h3 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--gray-900);margin-bottom:4px;"><i class="bi bi-graph-up-arrow me-1" style="color:var(--emerald);"></i> Cutoff Trend: IIT Bombay · CSE · General</h3>
-    <p style="font-size:.82rem;color:var(--gray-500);margin-bottom:16px;">Closing rank over the last 4 years (lower is harder to get in)</p>
-    <div class="trend-bar-group">
-      <div class="trend-row"><span class="trend-label">2022</span><div class="trend-bar-bg"><div class="trend-bar" style="width:82%;">68</div></div><span class="trend-value">Rank 68</span></div>
-      <div class="trend-row"><span class="trend-label">2023</span><div class="trend-bar-bg"><div class="trend-bar" style="width:78%;">71</div></div><span class="trend-value">Rank 71</span></div>
-      <div class="trend-row"><span class="trend-label">2024</span><div class="trend-bar-bg"><div class="trend-bar" style="width:75%;">72</div></div><span class="trend-value">Rank 72</span></div>
-      <div class="trend-row"><span class="trend-label">2025</span><div class="trend-bar-bg"><div class="trend-bar" style="width:73%;">73</div></div><span class="trend-value">Rank 73</span></div>
+  <!-- Trend Visualization -->
+  <div style="margin-top:48px;">
+    <h3 style="font-family:var(--font-head);font-size:1.2rem;font-weight:700;color:var(--heading);margin-bottom:20px;">IIT Bombay CSE — 5-Year Cutoff Trend (General)</h3>
+    <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-lg);padding:28px 24px;">
+      <div style="display:flex;align-items:flex-end;gap:24px;height:160px;border-bottom:2px solid var(--divider);padding-bottom:12px;" id="trendBars">
+        <!-- bars generated by JS -->
+      </div>
+      <div style="display:flex;gap:24px;margin-top:16px;padding-left:4px;" id="trendLabels"></div>
     </div>
   </div>
 
-  <div class="disclaimer">
-    <strong>Disclaimer:</strong> Cutoff data is sourced from official counselling bodies (JoSAA, NTA, state CETs). While we ensure accuracy, we recommend cross-checking with official portals before making decisions. EduPortal does not guarantee seat availability.
+  <!-- Disclaimer -->
+  <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;margin-top:32px;font-size:.82rem;color:var(--text-muted);line-height:1.7;">
+    <strong style="color:var(--text);">⚠️ Disclaimer:</strong> Cutoff data is for informational purposes only. Always verify with official sources (JOSAA, MHT-CET Cell, NTA) before making admission decisions. Actual cutoffs may vary based on seat availability and seat matrix changes.
   </div>
-</div>
 
-<footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><a class="brand" href="index.html"><div class="brand-icon">🎓</div><span class="brand-text">Edu<span>Portal</span></span></a><p>India's most trusted college discovery and admission guidance platform.</p></div><div class="footer-col"><h4>Explore</h4><ul><li><a href="colleges_section.html">Colleges</a></li><li><a href="cutoff.html">Cutoffs</a></li><li><a href="courses.html">Courses</a></li><li><a href="admission.html">Admission</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="about.html#faq">FAQs</a></li><li><a href="#">Scholarships</a></li></ul></div><div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Privacy</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 EduPortal. All rights reserved.</p><div class="social-links"><a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a><a href="#" class="social-link"><i class="bi bi-instagram"></i></a><a href="#" class="social-link"><i class="bi bi-linkedin"></i></a><a href="#" class="social-link"><i class="bi bi-youtube"></i></a></div></div></div></footer>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand"><a class="brand" href="index.html"><div class="brand-icon">🎓</div><span class="brand-text">Edu<span>Portal</span></span></a><p>India's most trusted platform for college discovery and admission guidance.</p></div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="colleges_section.html">Top Colleges</a></li><li><a href="cutoff.html">Cutoff Data</a></li><li><a href="courses.html">Courses</a></li><li><a href="admission.html">Admission Guide</a></li><li><a href="counselling.html">Counselling</a></li></ul></div>
+      <div class="footer-col"><h4>Resources</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="about.html#faq">FAQs</a></li><li><a href="#">Scholarships</a></li><li><a href="#">Exam Calendar</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 EduPortal. All rights reserved.</p>
+      <div class="social-links"><a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a><a href="#" class="social-link"><i class="bi bi-instagram"></i></a><a href="#" class="social-link"><i class="bi bi-linkedin"></i></a><a href="#" class="social-link"><i class="bi bi-youtube"></i></a></div>
+    </div>
+  </div>
+</footer>
 <button class="scroll-top" title="Back to top"><i class="bi bi-arrow-up"></i></button>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/shared.js"></script>
+<script>
+function switchExam(btn, label) {
+  document.querySelectorAll('.exam-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('examLabel').textContent = label + ' 2025';
+}
+function applyFilters() {
+  showToast('Filters applied! Showing matching cutoff records.', 'success');
+}
+function downloadCSV() {
+  showToast('CSV download started…', 'info');
+}
+// Trend bars
+(function(){
+  const data = [{y:2021,v:89},{y:2022,v:95},{y:2023,v:104},{y:2024,v:94},{y:2025,v:112}];
+  const max = Math.max(...data.map(d=>d.v));
+  const bars = document.getElementById('trendBars');
+  const labels = document.getElementById('trendLabels');
+  const isDark = document.documentElement.getAttribute('data-theme')==='dark';
+  data.forEach(d => {
+    const h = Math.round((d.v/max)*140);
+    const bar = document.createElement('div');
+    bar.style.cssText = `flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;`;
+    bar.innerHTML = `<span style="font-size:.78rem;font-weight:700;color:var(--saffron);">${d.v}</span><div style="width:100%;height:${h}px;background:var(--btn-bg);border-radius:6px 6px 0 0;transition:.5s;"></div>`;
+    bars.appendChild(bar);
+    const lbl = document.createElement('div');
+    lbl.style.cssText = 'flex:1;text-align:center;font-size:.78rem;color:var(--text-muted);font-weight:600;';
+    lbl.textContent = d.y;
+    labels.appendChild(lbl);
+  });
+})();
+</script>
 </body>
 </html>
