@@ -3,405 +3,102 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login / Register | EduPortal</title>
-  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('ep-theme')||'dark');</script>
+  <title>Login & Register | EduPortal</title>
+  <meta name="description" content="Create your free EduPortal account or login to access personalised college recommendations, saved shortcuts and counselling bookings."/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="css/shared.css"/>
   <style>
-    body{min-height:100vh;background:var(--bg);display:flex;flex-direction:column;}
-    /* Auth page layout */
-    .auth-page{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 70px);}
-    .auth-side{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:48px;}
-    .auth-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-    .auth-side-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(0,29,61,.75) 0%,rgba(0,21,46,.92) 100%);}
-    .auth-side-content{position:relative;z-index:1;}
-    .auth-side-title{font-family:var(--font-head);font-size:2rem;font-weight:800;color:#fff;line-height:1.2;margin-bottom:14px;}
-    .auth-side-title span{color:var(--saffron);}
-    .auth-side-desc{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.75;margin-bottom:24px;}
-    .auth-bullets{list-style:none;margin:0;padding:0;}
-    .auth-bullets li{font-size:.85rem;color:rgba(255,255,255,.85);padding:5px 0;display:flex;align-items:center;gap:8px;}
-    .auth-bullets li::before{content:'✓';background:var(--saffron);color:#000;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;flex-shrink:0;}
-    /* Auth form panel */
-    .auth-panel{background:var(--bg);display:flex;align-items:center;justify-content:center;padding:40px 24px;}
-    .auth-box{width:100%;max-width:460px;}
-    .auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:32px;}
-    .auth-logo-icon{width:40px;height:40px;background:var(--btn-bg);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
-    .auth-logo-text{font-family:var(--font-head);font-size:1.3rem;font-weight:800;color:var(--text);}
-    .auth-logo-text span{color:var(--link);}
-    /* Tab switcher */
-    .auth-tabs{display:flex;background:var(--surface);border:1px solid var(--card-border);border-radius:var(--radius-md);padding:4px;margin-bottom:28px;}
-    .auth-tab{flex:1;text-align:center;padding:10px;border-radius:calc(var(--radius-md) - 2px);font-size:.88rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:var(--transition);}
-    .auth-tab.active{background:var(--btn-bg);color:var(--btn-color);}
-    /* Forms */
-    .auth-form{display:none;}
-    .auth-form.show{display:block;}
-    .auth-title{font-family:var(--font-head);font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:6px;}
-    .auth-subtitle{font-size:.85rem;color:var(--text-muted);margin-bottom:28px;}
-    .field-wrap{margin-bottom:16px;}
-    .field-label{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);margin-bottom:6px;display:block;}
-    .field-inner{position:relative;}
-    .field-inner .field-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:.95rem;pointer-events:none;}
-    .field-inner input{padding-left:38px;width:100%;}
-    .field-inner .toggle-pw{position:absolute;right:13px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text-muted);background:none;border:none;font-size:.95rem;padding:0;}
-    .field-inner .toggle-pw:hover{color:var(--link);}
-    /* Password strength */
-    .pw-strength{margin-top:6px;height:4px;border-radius:2px;background:var(--divider);overflow:hidden;}
-    .pw-strength-bar{height:100%;width:0;transition:width .3s,background .3s;border-radius:2px;}
-    .pw-hint{font-size:.74rem;color:var(--text-muted);margin-top:4px;}
-    /* Captcha */
-    .captcha-box{background:var(--surface);border:1px solid var(--card-border);border-radius:var(--radius-md);padding:16px;margin-bottom:16px;}
-    .captcha-question{font-size:.95rem;font-weight:700;color:var(--card-heading);margin-bottom:10px;}
-    .captcha-row{display:flex;gap:10px;align-items:center;}
-    .captcha-row input{flex:1;}
-    .captcha-refresh{background:none;border:1px solid var(--card-border);border-radius:var(--radius-sm);color:var(--text-muted);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);flex-shrink:0;}
-    .captcha-refresh:hover{border-color:var(--btn-bg);color:var(--link);}
-    .captcha-error{color:#ef4444;font-size:.78rem;margin-top:6px;display:none;}
-    /* Social login */
-    .divider-text{display:flex;align-items:center;gap:12px;color:var(--text-muted);font-size:.8rem;margin:20px 0;}
-    .divider-text::before,.divider-text::after{content:'';flex:1;height:1px;background:var(--divider);}
-    .social-btns{display:flex;gap:12px;}
-    .btn-social{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;background:var(--surface);border:1px solid var(--card-border);border-radius:var(--radius-md);font-size:.83rem;font-weight:600;color:var(--text);cursor:pointer;transition:var(--transition);}
-    .btn-social:hover{border-color:var(--btn-bg);}
-    /* Error/success messages */
-    .form-msg{padding:10px 14px;border-radius:var(--radius-md);font-size:.83rem;margin-bottom:14px;display:none;}
-    .form-msg.error{background:rgba(239,68,68,.1);border:1px solid #ef4444;color:#ef4444;}
-    .form-msg.success{background:rgba(34,197,94,.1);border:1px solid #22c55e;color:#22c55e;}
-    /* Theme toggle on auth page */
-    .auth-theme{position:fixed;top:20px;right:20px;z-index:100;}
-    /* Responsive */
-    @media(max-width:900px){.auth-page{grid-template-columns:1fr;}.auth-side{display:none;}}
-    @media(max-width:600px){.auth-panel{padding:24px 16px;}.auth-box{max-width:100%;}.auth-tabs{border-radius:var(--radius-sm);}.social-btns{flex-direction:column;}}
-    @media(max-width:480px){.auth-title{font-size:1.2rem;}.auth-subtitle{font-size:.8rem;}.field-label{font-size:.72rem;}}
+    .auth-page{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:var(--white);}
+    .auth-side{background:var(--emerald);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 48px;position:relative;overflow:hidden;}
+    .auth-side::before{content:'';position:absolute;width:350px;height:350px;background:rgba(255,255,255,.06);border-radius:50%;top:-80px;right:-80px;}
+    .auth-side::after{content:'';position:absolute;width:250px;height:250px;background:rgba(212,175,55,.08);border-radius:50%;bottom:-60px;left:-40px;}
+    .auth-side h2{font-family:var(--font-head);font-size:2.4rem;font-weight:800;color:#fff;margin-bottom:16px;position:relative;z-index:1;text-align:center;}
+    .auth-side h2 span{color:var(--gold-light);}
+    .auth-side p{color:rgba(255,255,255,.8);font-size:1rem;line-height:1.7;text-align:center;max-width:380px;position:relative;z-index:1;}
+    .auth-features{margin-top:32px;display:flex;flex-direction:column;gap:14px;position:relative;z-index:1;}
+    .auth-feature{display:flex;align-items:center;gap:12px;color:rgba(255,255,255,.85);font-size:.9rem;}
+    .auth-feature i{color:var(--gold-light);font-size:1.1rem;}
+    .auth-form-side{display:flex;align-items:center;justify-content:center;padding:48px;}
+    .auth-form-box{width:100%;max-width:420px;}
+    .auth-form-box h1{font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--gray-900);margin-bottom:6px;}
+    .auth-form-box>p{font-size:.9rem;color:var(--gray-500);margin-bottom:28px;}
+    .auth-tabs{display:flex;gap:4px;margin-bottom:28px;background:var(--off-white);border-radius:var(--radius-sm);padding:4px;}
+    .auth-tab{flex:1;padding:10px;text-align:center;font-size:.88rem;font-weight:600;border-radius:var(--radius-xs);cursor:pointer;transition:var(--transition);color:var(--gray-500);}
+    .auth-tab.active{background:var(--white);color:var(--emerald);box-shadow:var(--shadow-sm);}
+    .auth-form{display:flex;flex-direction:column;gap:16px;}
+    .auth-form .form-field{display:flex;flex-direction:column;gap:5px;}
+    .auth-form .form-field label{font-size:.8rem;font-weight:600;color:var(--gray-700);}
+    .auth-form .form-field input{width:100%;padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);font-size:.9rem;font-family:var(--font-body);color:var(--text);outline:none;transition:var(--transition);}
+    .auth-form .form-field input:focus{border-color:var(--emerald);box-shadow:var(--input-focus-glow);}
+    .auth-extras{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;margin-top:-4px;}
+    .auth-extras label{display:flex;align-items:center;gap:6px;color:var(--gray-500);cursor:pointer;}
+    .auth-extras a{color:var(--emerald);font-weight:500;}
+    .auth-divider{display:flex;align-items:center;gap:14px;margin:20px 0;font-size:.82rem;color:var(--gray-400);}
+    .auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--gray-100);}
+    .social-logins{display:flex;gap:10px;}
+    .social-login-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);font-size:.85rem;font-weight:500;color:var(--gray-700);cursor:pointer;background:var(--white);transition:var(--transition);}
+    .social-login-btn:hover{border-color:var(--emerald);color:var(--emerald);box-shadow:var(--shadow-sm);}
+    .auth-switch{text-align:center;font-size:.85rem;color:var(--gray-500);margin-top:24px;}
+    .auth-switch a{color:var(--emerald);font-weight:600;}
+    @media(max-width:768px){.auth-page{grid-template-columns:1fr;}.auth-side{display:none;}.auth-form-side{padding:80px 24px 40px;}}
   </style>
 </head>
 <body>
-
-<button class="btn-theme auth-theme" id="themeToggle" onclick="toggleTheme()"></button>
-
 <div class="auth-page">
-  <!-- Left side panel -->
   <div class="auth-side">
-    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900&q=80" alt="Campus"/>
-    <div class="auth-side-overlay"></div>
-    <div class="auth-side-content">
-      <div class="auth-side-title">Your <span>Dream College</span><br>Journey Starts Here</div>
-      <p class="auth-side-desc">Join over 2 million students who use EduPortal to discover colleges, compare cutoffs, get expert counselling and crack their admissions.</p>
-      <ul class="auth-bullets">
-        <li>Access cutoff data for 5,000+ colleges</li>
-        <li>Book free 1-on-1 counselling sessions</li>
-        <li>Get personalised college recommendations</li>
-        <li>Save colleges and track your shortlist</li>
-        <li>Receive exam alerts and deadline reminders</li>
-      </ul>
+    <h2>Welcome to<br>Edu<span>Portal</span></h2>
+    <p>Join 2 million+ students making smarter college decisions with data-driven insights.</p>
+    <div class="auth-features">
+      <div class="auth-feature"><i class="bi bi-check-circle-fill"></i> Compare 10,000+ colleges instantly</div>
+      <div class="auth-feature"><i class="bi bi-check-circle-fill"></i> Access year-wise cutoff data</div>
+      <div class="auth-feature"><i class="bi bi-check-circle-fill"></i> Book free counselling sessions</div>
+      <div class="auth-feature"><i class="bi bi-check-circle-fill"></i> Save and track your shortlist</div>
     </div>
   </div>
-
-  <!-- Right form panel -->
-  <div class="auth-panel">
-    <div class="auth-box">
-      <!-- Logo -->
-      <div class="auth-logo">
-        <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-          <div class="auth-logo-icon">🎓</div>
-          <div class="auth-logo-text">Edu<span>Portal</span></div>
-        </a>
-      </div>
-
-      <!-- Tab switcher -->
+  <div class="auth-form-side">
+    <div class="auth-form-box">
+      <h1 id="authTitle">Welcome back</h1>
+      <p id="authSub">Login to your EduPortal account</p>
       <div class="auth-tabs">
-        <div class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Sign In</div>
-        <div class="auth-tab" id="tabRegister" onclick="switchTab('register')">Create Account</div>
+        <div class="auth-tab active" onclick="switchTab('login')">Login</div>
+        <div class="auth-tab" onclick="switchTab('register')">Register</div>
       </div>
-
-      <!-- LOGIN FORM -->
-      <div class="auth-form show" id="loginForm">
-        <h2 class="auth-title">Welcome back</h2>
-        <p class="auth-subtitle">Sign in to continue to your EduPortal account.</p>
-        <div class="form-msg" id="loginMsg"></div>
-        <form onsubmit="doLogin(event)" novalidate>
-          <div class="field-wrap">
-            <label class="field-label">Email Address</label>
-            <div class="field-inner">
-              <i class="bi bi-envelope-fill field-icon"></i>
-              <input class="input-ep" type="email" id="loginEmail" placeholder="you@email.com" required autocomplete="email"/>
-            </div>
-          </div>
-          <div class="field-wrap">
-            <label class="field-label">Password</label>
-            <div class="field-inner">
-              <i class="bi bi-lock-fill field-icon"></i>
-              <input class="input-ep" type="password" id="loginPassword" placeholder="Your password" required autocomplete="current-password"/>
-              <button type="button" class="toggle-pw" onclick="togglePw('loginPassword',this)"><i class="bi bi-eye-slash-fill"></i></button>
-            </div>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;">
-            <label style="display:flex;align-items:center;gap:7px;font-size:.83rem;color:var(--text-muted);cursor:pointer;">
-              <input type="checkbox" id="rememberMe" style="accent-color:var(--btn-bg);width:15px;height:15px;"/> Remember me
-            </label>
-            <a href="#" style="font-size:.83rem;color:var(--link);font-weight:600;" onclick="forgotPassword(event)">Forgot password?</a>
-          </div>
-          <button type="submit" class="btn-ep" style="width:100%;justify-content:center;padding:13px;font-size:.95rem;">
-            <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
-          </button>
-        </form>
-        <div class="divider-text">or continue with</div>
-        <div class="social-btns">
-          <button class="btn-social" onclick="socialLogin('Google')"><i class="bi bi-google" style="color:#db4437;"></i> Google</button>
-          <button class="btn-social" onclick="socialLogin('Facebook')"><i class="bi bi-facebook" style="color:#1877f2;"></i> Facebook</button>
-        </div>
-        <p style="font-size:.83rem;color:var(--text-muted);text-align:center;margin-top:22px;">
-          Don't have an account? <a href="#" onclick="switchTab('register');return false;" style="color:var(--link);font-weight:700;">Create one free</a>
-        </p>
+      <form class="auth-form" id="loginForm" onsubmit="handleAuth(event,'login')">
+        <div class="form-field"><label>Email Address</label><input type="email" placeholder="you@email.com" required/></div>
+        <div class="form-field"><label>Password</label><input type="password" placeholder="Enter password" required/></div>
+        <div class="auth-extras"><label><input type="checkbox"/> Remember me</label><a href="#">Forgot password?</a></div>
+        <button type="submit" class="btn-ep" style="width:100%;justify-content:center;">Login</button>
+      </form>
+      <form class="auth-form" id="registerForm" style="display:none;" onsubmit="handleAuth(event,'register')">
+        <div class="form-field"><label>Full Name</label><input type="text" placeholder="Your name" required/></div>
+        <div class="form-field"><label>Email Address</label><input type="email" placeholder="you@email.com" required/></div>
+        <div class="form-field"><label>Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX"/></div>
+        <div class="form-field"><label>Password</label><input type="password" placeholder="Create password" required/></div>
+        <button type="submit" class="btn-ep" style="width:100%;justify-content:center;">Create Account</button>
+      </form>
+      <div class="auth-divider">or continue with</div>
+      <div class="social-logins">
+        <button class="social-login-btn"><i class="bi bi-google"></i> Google</button>
+        <button class="social-login-btn"><i class="bi bi-linkedin"></i> LinkedIn</button>
       </div>
-
-      <!-- REGISTER FORM -->
-      <div class="auth-form" id="registerForm">
-        <h2 class="auth-title">Create your account</h2>
-        <p class="auth-subtitle">Free forever. No credit card required.</p>
-        <div class="form-msg" id="registerMsg"></div>
-        <form onsubmit="doRegister(event)" novalidate>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-            <div class="field-wrap" style="margin-bottom:0;">
-              <label class="field-label">First Name</label>
-              <div class="field-inner">
-                <i class="bi bi-person-fill field-icon"></i>
-                <input class="input-ep" type="text" id="regFirst" placeholder="First name" required/>
-              </div>
-            </div>
-            <div class="field-wrap" style="margin-bottom:0;">
-              <label class="field-label">Last Name</label>
-              <div class="field-inner">
-                <i class="bi bi-person-fill field-icon"></i>
-                <input class="input-ep" type="text" id="regLast" placeholder="Last name" required/>
-              </div>
-            </div>
-          </div>
-          <div class="field-wrap" style="margin-top:14px;">
-            <label class="field-label">Email Address</label>
-            <div class="field-inner">
-              <i class="bi bi-envelope-fill field-icon"></i>
-              <input class="input-ep" type="email" id="regEmail" placeholder="you@email.com" required autocomplete="email"/>
-            </div>
-          </div>
-          <div class="field-wrap">
-            <label class="field-label">Phone Number</label>
-            <div class="field-inner">
-              <i class="bi bi-phone-fill field-icon"></i>
-              <input class="input-ep" type="tel" id="regPhone" placeholder="+91 XXXXX XXXXX" pattern="[0-9]{10}"/>
-            </div>
-          </div>
-          <div class="field-wrap">
-            <label class="field-label">Password</label>
-            <div class="field-inner">
-              <i class="bi bi-lock-fill field-icon"></i>
-              <input class="input-ep" type="password" id="regPassword" placeholder="Create a strong password" required autocomplete="new-password" oninput="checkPwStrength(this.value)"/>
-              <button type="button" class="toggle-pw" onclick="togglePw('regPassword',this)"><i class="bi bi-eye-slash-fill"></i></button>
-            </div>
-            <div class="pw-strength"><div class="pw-strength-bar" id="pwBar"></div></div>
-            <div class="pw-hint" id="pwHint">Use 8+ characters with uppercase, numbers and symbols.</div>
-          </div>
-          <div class="field-wrap">
-            <label class="field-label">Confirm Password</label>
-            <div class="field-inner">
-              <i class="bi bi-lock-fill field-icon"></i>
-              <input class="input-ep" type="password" id="regConfirm" placeholder="Re-enter password" required autocomplete="new-password"/>
-              <button type="button" class="toggle-pw" onclick="togglePw('regConfirm',this)"><i class="bi bi-eye-slash-fill"></i></button>
-            </div>
-          </div>
-
-          <!-- MATH CAPTCHA -->
-          <div class="captcha-box">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-              <span style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);">Security Check</span>
-              <span style="font-size:.75rem;color:var(--text-muted);">🔒 Anti-Bot Protection</span>
-            </div>
-            <div class="captcha-question" id="captchaQuestion">Loading…</div>
-            <div class="captcha-row">
-              <input class="input-ep" type="number" id="captchaInput" placeholder="Your answer" min="0" max="200" style="padding:10px 14px;"/>
-              <button type="button" class="captcha-refresh" onclick="generateCaptcha()" title="New question"><i class="bi bi-arrow-clockwise"></i></button>
-            </div>
-            <div class="captcha-error" id="captchaError">Incorrect answer. Please try again.</div>
-          </div>
-
-          <div style="margin-bottom:20px;">
-            <label style="display:flex;align-items:flex-start;gap:8px;font-size:.82rem;color:var(--text-muted);cursor:pointer;line-height:1.5;">
-              <input type="checkbox" id="agreeTerms" style="accent-color:var(--btn-bg);width:15px;height:15px;margin-top:2px;flex-shrink:0;" required/>
-              I agree to the <a href="#" style="color:var(--link);font-weight:600;">&nbsp;Terms of Service&nbsp;</a> and <a href="#" style="color:var(--link);font-weight:600;">&nbsp;Privacy Policy</a>
-            </label>
-          </div>
-          <button type="submit" class="btn-ep" style="width:100%;justify-content:center;padding:13px;font-size:.95rem;">
-            <i class="bi bi-person-check-fill me-2"></i>Create Account
-          </button>
-        </form>
-        <div class="divider-text">or sign up with</div>
-        <div class="social-btns">
-          <button class="btn-social" onclick="socialLogin('Google')"><i class="bi bi-google" style="color:#db4437;"></i> Google</button>
-          <button class="btn-social" onclick="socialLogin('Facebook')"><i class="bi bi-facebook" style="color:#1877f2;"></i> Facebook</button>
-        </div>
-        <p style="font-size:.83rem;color:var(--text-muted);text-align:center;margin-top:20px;">
-          Already have an account? <a href="#" onclick="switchTab('login');return false;" style="color:var(--link);font-weight:700;">Sign in</a>
-        </p>
-      </div>
+      <div class="auth-switch" id="authSwitch">Don't have an account? <a href="#" onclick="switchTab('register');return false;">Register free</a></div>
     </div>
   </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/shared.js"></script>
 <script>
-// ─── Tab Switching ──────────────────────────────────────────────
-function switchTab(tab) {
-  document.getElementById('loginForm').classList.toggle('show', tab === 'login');
-  document.getElementById('registerForm').classList.toggle('show', tab === 'register');
-  document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
-  document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
-  if (tab === 'register') generateCaptcha();
+function switchTab(tab){
+  const isLogin=tab==='login';
+  document.getElementById('loginForm').style.display=isLogin?'flex':'none';
+  document.getElementById('registerForm').style.display=isLogin?'none':'flex';
+  document.getElementById('authTitle').textContent=isLogin?'Welcome back':'Create your account';
+  document.getElementById('authSub').textContent=isLogin?'Login to your EduPortal account':'Join 2M+ students on EduPortal';
+  document.getElementById('authSwitch').innerHTML=isLogin?"Don't have an account? <a href='#' onclick='switchTab(\"register\");return false;'>Register free</a>":"Already have an account? <a href='#' onclick='switchTab(\"login\");return false;'>Login</a>";
+  document.querySelectorAll('.auth-tab').forEach((t,i)=>{t.classList.toggle('active',(isLogin&&i===0)||(!isLogin&&i===1));});
 }
-
-// ─── Hash-based routing ─────────────────────────────────────────
-(function() {
-  if (location.hash === '#register' || new URLSearchParams(location.search).get('mode') === 'register') {
-    switchTab('register');
-  }
-})();
-
-// ─── Password visibility toggle ────────────────────────────────
-function togglePw(id, btn) {
-  const inp = document.getElementById(id);
-  const isText = inp.type === 'text';
-  inp.type = isText ? 'password' : 'text';
-  btn.innerHTML = isText ? '<i class="bi bi-eye-slash-fill"></i>' : '<i class="bi bi-eye-fill"></i>';
-}
-
-// ─── Password strength ──────────────────────────────────────────
-function checkPwStrength(val) {
-  const bar = document.getElementById('pwBar');
-  const hint = document.getElementById('pwHint');
-  let score = 0;
-  if (val.length >= 8) score++;
-  if (/[A-Z]/.test(val)) score++;
-  if (/[0-9]/.test(val)) score++;
-  if (/[^A-Za-z0-9]/.test(val)) score++;
-  const levels = [
-    { width: '0%',   bg: 'transparent', text: 'Use 8+ characters with uppercase, numbers and symbols.' },
-    { width: '25%',  bg: '#ef4444',     text: 'Weak — add uppercase letters.' },
-    { width: '50%',  bg: '#f97316',     text: 'Fair — add numbers or symbols.' },
-    { width: '75%',  bg: '#eab308',     text: 'Good — add a special character.' },
-    { width: '100%', bg: '#22c55e',     text: 'Strong password ✓' }
-  ];
-  bar.style.width   = levels[score].width;
-  bar.style.background = levels[score].bg;
-  hint.textContent  = levels[score].text;
-  hint.style.color  = levels[score].bg === 'transparent' ? 'var(--text-muted)' : levels[score].bg;
-}
-
-// ─── CAPTCHA ────────────────────────────────────────────────────
-function generateCaptcha() {
-  const ops = ['+', '×', '-'];
-  const op  = ops[Math.floor(Math.random() * ops.length)];
-  let a, b, answer;
-  if (op === '+') {
-    a = Math.floor(Math.random() * 15) + 1;
-    b = Math.floor(Math.random() * 15) + 1;
-    answer = a + b;
-  } else if (op === '×') {
-    a = Math.floor(Math.random() * 9) + 2;
-    b = Math.floor(Math.random() * 9) + 2;
-    answer = a * b;
-  } else {
-    a = Math.floor(Math.random() * 15) + 10;
-    b = Math.floor(Math.random() * 9) + 1;
-    answer = a - b;
-  }
-  document.getElementById('captchaQuestion').textContent = `What is ${a} ${op} ${b} ?`;
-  window._captchaAns = answer;
-  document.getElementById('captchaInput').value = '';
-  document.getElementById('captchaError').style.display = 'none';
-}
-
-function validateCaptcha() {
-  const input = parseInt(document.getElementById('captchaInput').value, 10);
-  if (isNaN(input) || input !== window._captchaAns) {
-    document.getElementById('captchaError').style.display = 'block';
-    generateCaptcha();
-    return false;
-  }
-  document.getElementById('captchaError').style.display = 'none';
-  return true;
-}
-
-// ─── Login ──────────────────────────────────────────────────────
-function doLogin(e) {
-  e.preventDefault();
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass  = document.getElementById('loginPassword').value;
-  const msg   = document.getElementById('loginMsg');
-  if (!email || !pass) {
-    showMsg(msg, 'error', 'Please fill in all fields.');
-    return;
-  }
-  // Simulate auth (frontend-only demo)
-  msg.style.display = 'none';
-  showToast('✅ Logged in successfully! Redirecting…', 'success');
-  setTimeout(() => { location.href = 'index.html'; }, 1500);
-}
-
-// ─── Register ───────────────────────────────────────────────────
-function doRegister(e) {
-  e.preventDefault();
-  const msg = document.getElementById('registerMsg');
-  const first   = document.getElementById('regFirst').value.trim();
-  const last    = document.getElementById('regLast').value.trim();
-  const email   = document.getElementById('regEmail').value.trim();
-  const pass    = document.getElementById('regPassword').value;
-  const confirm = document.getElementById('regConfirm').value;
-  const agreed  = document.getElementById('agreeTerms').checked;
-
-  if (!first || !last || !email || !pass || !confirm) {
-    showMsg(msg, 'error', 'Please fill in all required fields.'); return;
-  }
-  if (pass.length < 8) {
-    showMsg(msg, 'error', 'Password must be at least 8 characters.'); return;
-  }
-  if (pass !== confirm) {
-    showMsg(msg, 'error', 'Passwords do not match.'); return;
-  }
-  if (!agreed) {
-    showMsg(msg, 'error', 'You must agree to the Terms of Service.'); return;
-  }
-  if (!validateCaptcha()) return;
-
-  showMsg(msg, 'success', '🎉 Account created! Redirecting…');
-  setTimeout(() => { location.href = 'index.html'; }, 1500);
-}
-
-// ─── Forgot password ────────────────────────────────────────────
-function forgotPassword(e) {
-  e.preventDefault();
-  const email = document.getElementById('loginEmail').value.trim();
-  if (!email) {
-    showMsg(document.getElementById('loginMsg'), 'error', 'Enter your email address first, then click Forgot password.');
-    return;
-  }
-  showMsg(document.getElementById('loginMsg'), 'success', `Reset link sent to ${email}! Check your inbox.`);
-}
-
-// ─── Social login ───────────────────────────────────────────────
-function socialLogin(provider) {
-  showToast(`${provider} login coming soon! Use email/password for now.`, 'info');
-}
-
-// ─── Helper ─────────────────────────────────────────────────────
-function showMsg(el, type, text) {
-  el.className = 'form-msg ' + type;
-  el.textContent = text;
-  el.style.display = 'block';
-}
-
-// Init
-generateCaptcha();
+function handleAuth(e,type){e.preventDefault();showToast(type==='login'?'Welcome back!':'Account created successfully!','success');e.target.reset();}
+if(location.hash==='#register') switchTab('register');
 </script>
 </body>
 </html>
